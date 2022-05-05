@@ -1,0 +1,1167 @@
+##############################################################################
+##############################################################################
+#	Makefile
+##############################################################################
+##############################################################################
+#	Watcom C++ 10.5
+##############################################################################
+##############################################################################
+
+##############################################################################
+#	Make Options
+##############################################################################
+
+.ERASE
+
+##############################################################################
+#	Assembler
+##############################################################################
+
+MASM = 1
+
+##############################################################################
+#	Compiler and Linker
+##############################################################################
+
+cc = wcc386
+lk = wlink
+
+##############################################################################
+#	Assembler
+##############################################################################
+
+asm = ml
+
+##############################################################################
+#	H2Inc
+##############################################################################
+
+h2inc = h2inc
+
+##############################################################################
+#	Debug Definitions
+##############################################################################
+
+!ifdef	NODEBUG
+debug =
+!else
+debug = -d2
+!endif
+
+##############################################################################
+#	Optimisation
+##############################################################################
+
+!ifdef OPTIMIZE
+optimise = -s -fpi87 -fp5 -oneatx
+!else
+optimise =
+!endif
+
+##############################################################################
+#	General Compiler Options.
+##############################################################################
+
+ccopts = /bt=dos /mf /zq /zp4 /5r 
+
+brstuff = -i..\inc -i..\fw -DSTATIC=static -DBASED_FLOAT=1
+
+#brstuff = -DBASED_FLOAT=1 -DBUILD=RELEASE -DBASE_TYPE=FLOAT -i..\inc &
+#	-DSTATIC=static
+
+##############################################################################
+#	Assembler Options
+##############################################################################
+
+!ifdef	NODEBUG
+asmopts = /c /nologo /Zi -Cp -D__WATCOMC__=1 -DBASED_FLOAT -I. -DDEBUG=0 -DCHECK=1
+!else
+asmopts = /c /nologo -Cp -D__WATCOMC__=1 -DBASED_FLOAT -I. -DDEBUG=0 -DCHECK=1
+!endif
+
+dosioasmopts = -D__DOS4G__=1 -D__DPMI__=1
+
+##############################################################################
+#	H2Inc Options
+##############################################################################
+
+h2incopts = /nologo /G3 /Zp4 /C /D__WATCOMC__ /D__H2INC__ /D_NO_PROTOTYPES -DBASED_FLOAT /I..\inc /I..\fw
+
+##############################################################################
+#	Rules
+##############################################################################
+
+fwcfiles =	fw\actsupt.obj	&
+		fw\angles.obj	&
+		fw\brlists.obj	&
+		fw\brqsort.obj	&
+		fw\bswap.obj	&
+		fw\custsupt.obj	&
+		fw\datafile.obj	&
+		fw\def_mdl.obj	&
+		fw\def_mat.obj	&
+		fw\diag.obj	&
+		fw\envmap.obj	&
+		fw\error.obj	&
+		fw\ffhooks.obj	&
+		fw\file.obj	&
+		fw\fileops.obj	&
+		fw\fixed.obj	&
+		fw\fontptrs.obj	&
+		fw\fwsetup.obj	&
+		fw\light8.obj	&
+		fw\light8o.obj	&
+		fw\light24.obj	&
+		fw\light24o.obj	&
+		fw\logprint.obj	&
+		fw\matrix23.obj	&
+		fw\matrix34.obj	&
+		fw\matrix4.obj	&
+		fw\mem.obj	&
+		fw\onscreen.obj	&
+		fw\pick.obj	&
+		fw\pixelmap.obj	&
+		fw\pmdsptch.obj	&
+		fw\pmgenops.obj	&
+		fw\pmmemops.obj	&
+		fw\pool.obj	&
+		fw\prelight.obj	&
+		fw\prepmatl.obj	&
+		fw\prepmesh.obj	&
+		fw\prepmap.obj	&
+		fw\preptab.obj	&
+		fw\quat.obj	&
+		fw\quantize.obj	&
+		fw\register.obj	&
+		fw\regsupt.obj	&
+		fw\resource.obj	&
+		fw\scalar.obj	&
+		fw\scale.obj	&
+		fw\scratch.obj	&
+		fw\scrstr.obj	&
+		fw\surface.obj	&
+		fw\transfrm.obj	&
+		fw\vector.obj	&
+	
+fwasmfiles =  	fw\fixed386.obj	&
+		fw\fxadc386.obj	&
+		fw\blockops.obj	&
+		fw\magicsym.obj	&
+		fw\memloops.obj &
+		fw\fnt3x5.obj	&
+		fw\fntp4x6.obj	&
+		fw\fntp7x9.obj	
+
+fwfiles = 	$(fwcfiles) $(fwasmfiles) 
+
+dosiocfiles =	dosio\dosgfx.obj	&
+		dosio\dosgfxcm.obj	&
+		dosio\mcga.obj		&
+		dosio\readmse.obj	&
+		dosio\keyboard.obj	&
+		dosio\vesa.obj		&
+		dosio\vesaops.obj	&
+		dosio\getenv.obj	&
+		dosio\dosdiag.obj	&
+		dosio\eventq.obj	&
+		dosio\realvec.obj
+
+dosioasmfiles = dosio\clock.obj		&
+		dosio\segregs.obj	&
+		dosio\divtrap.obj	&
+		dosio\realsupt.obj	&
+		dosio\vesaloop.obj	&
+		dosio\vesaapi.obj	&
+		dosio\farmem.obj 
+
+dosiofiles = $(dosiocfiles) $(dosioasmfiles)
+		
+zbcfiles = 	zb\awtmz.obj	&
+		zb\bbox.obj	&
+		zb\decalz.obj	&
+		zb\dither.obj	&
+		zb\frcp.obj	&
+		zb\l_piz.obj	&
+		zb\p_piz.obj	&
+		zb\perspz.obj	&
+		zb\zbclip.obj	&
+		zb\zbmatl.obj	&
+		zb\zbmesh.obj	&
+		zb\zbmeshe.obj	&
+		zb\zbmeshp.obj	&
+		zb\zbrendr.obj	&
+		zb\zbsetup.obj	&
+
+zbasmfiles = 	zb\mesh386.obj	&
+		zb\safediv.obj	&
+		zb\sar16.obj	&
+		zb\t_piza.obj	&
+		zb\ti8_piz.obj	&
+		zb\ti8_pizp.obj	&
+		zb\tt15_piz.obj	&
+		zb\tt24_piz.obj
+		
+zbfiles = 	$(zbcfiles) $(zbasmfiles)
+
+fmtcfiles = 	fmt\loadnff.obj	&
+		fmt\loadasc.obj	&
+		fmt\loadscr.obj	&
+		fmt\loadgif.obj	&
+		fmt\loadiff.obj	&
+		fmt\loadbmp.obj	&
+		fmt\loadtga.obj	&
+		fmt\savescr.obj
+
+fmtaasmfiles = 
+
+fmtfiles = 	$(fmtcfiles) $(fmtasmfiles)
+
+stdcfiles = 	std\stdfile.obj	&
+		std\stdmem.obj	&
+		std\stddiag.obj
+
+stdasmfiles = 
+
+stdfiles = 	$(stdcfiles) $(stdasmfiles)
+
+libs:		$(fwfiles) $(dosiofiles) $(zbfiles) $(fmtfiles) $(stdfiles)
+	@copy fw\fw.lib libs\brfwwfrr.lib
+	@copy dosio\dosio.lib libs\dio4gwrr.lib
+	@copy zb\zb.lib libs\brzbwfrr.lib
+	@copy fmt\fmt.lib libs\brfmwfrr.lib
+	@copy std\std.lib libs\brstwfrr.lib
+
+all:		$(libs)
+
+##############################################################################
+#	Source Files
+##############################################################################
+
+fw\actsupt.obj:	fw\actsupt.c .AUTODEPEND
+	@echo Actsupt
+	@cd fw
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) actsupt.c
+	@wlib -q -c fw.lib +- actsupt.obj
+	@cd ..
+
+fw\angles.obj:	fw\angles.c .AUTODEPEND
+	@echo Angles
+	@cd fw
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) angles.c
+	@wlib -q -c fw.lib +- angles.obj
+	@cd ..
+
+fw\brassert.obj:	fw\brassert.c .AUTODEPEND
+	@echo Brassert
+	@cd fw
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) brassert.c
+	@wlib -q -c fw.lib +- brassert.obj
+	@cd ..
+
+fw\brexcept.obj:	fw\brexcept.c .AUTODEPEND
+	@echo Brexcept
+	@cd fw
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) brexcept.c
+	@wlib -q -c fw.lib +- brexcept.obj
+	@cd ..
+
+fw\brlists.obj:	fw\brlists.c .AUTODEPEND
+	@echo Brlists
+	@cd fw
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) brlists.c
+	@wlib -q -c fw.lib +- brlists.obj
+	@cd ..
+
+fw\brqsort.obj:	fw\brqsort.c .AUTODEPEND
+	@echo Brqsort
+	@cd fw
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) brqsort.c
+	@wlib -q -c fw.lib +- brqsort.obj
+	@cd ..
+
+fw\bswap.obj:	fw\bswap.c .AUTODEPEND
+	@echo Bswap
+	@cd fw
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) bswap.c
+	@wlib -q -c fw.lib +- bswap.obj
+	@cd ..
+
+fw\custsupt.obj:	fw\custsupt.c .AUTODEPEND
+	@echo Custsupt
+	@cd fw
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) custsupt.c
+	@wlib -q -c fw.lib +- custsupt.obj
+	@cd ..
+
+fw\datafile.obj:	fw\datafile.c .AUTODEPEND
+	@echo Datafile
+	@cd fw
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) datafile.c
+	@wlib -q -c fw.lib +- datafile.obj
+	@cd ..
+
+fw\defdiag.obj:	fw\defdiag.c .AUTODEPEND
+	@echo Defdiag
+	@cd fw
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) defdiag.c
+	@wlib -q -c fw.lib +- defdiag.obj
+	@cd ..
+
+fw\deferr.obj:	fw\deferr.c .AUTODEPEND
+	@echo Deferr
+	@cd fw
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) deferr.c
+	@wlib -q -c fw.lib +- deferr.obj
+	@cd ..
+
+fw\deffile.obj:	fw\deffile.c .AUTODEPEND
+	@echo Deffile
+	@cd fw
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) deffile.c
+	@wlib -q -c fw.lib +- deffile.obj
+	@cd ..
+
+fw\defmem.obj:	fw\defmem.c .AUTODEPEND
+	@echo Defmem
+	@cd fw
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) defmem.c
+	@wlib -q -c fw.lib +- defmem.obj
+	@cd ..
+
+fw\def_mat.obj:	fw\def_mat.c .AUTODEPEND
+	@echo Def_mat
+	@cd fw
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) def_mat.c
+	@wlib -q -c fw.lib +- def_mat.obj
+	@cd ..
+
+fw\def_mdl.obj:	fw\def_mdl.c .AUTODEPEND
+	@echo Def_mdl
+	@cd fw
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) def_mdl.c
+	@wlib -q -c fw.lib +-def_mdl.obj
+	@cd ..
+
+fw\diag.obj:	fw\diag.c .AUTODEPEND
+	@echo Diag
+	@cd fw
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) diag.c
+	@wlib -q -c fw.lib +-diag.obj
+	@cd ..
+
+fw\envmap.obj:	fw\envmap.c .AUTODEPEND
+	@echo Envmap
+	@cd fw
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) envmap.c
+	@wlib -q -c fw.lib +-envmap.obj
+	@cd ..
+
+fw\error.obj:	fw\error.c .AUTODEPEND
+	@echo Error
+	@cd fw
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) error.c
+	@wlib -q -c fw.lib +-error.obj
+	@cd ..
+
+fw\ffhooks.obj:	fw\ffhooks.c .AUTODEPEND
+	@echo Ffhooks
+	@cd fw
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) ffhooks.c
+	@wlib -q -c fw.lib +-ffhooks.obj
+	@cd ..
+
+fw\file.obj:	fw\file.c .AUTODEPEND
+	@echo File
+	@cd fw
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) file.c
+	@wlib -q -c fw.lib +-file.obj
+	@cd ..
+
+fw\fileops.obj:	fw\fileops.c .AUTODEPEND
+	@echo Fileops
+	@cd fw
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) fileops.c
+	@wlib -q -c fw.lib +-fileops.obj
+	@cd ..
+
+fw\fixed.obj:	fw\fixed.c .AUTODEPEND
+	@echo Fixed
+	@cd fw
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) fixed.c
+	@wlib -q -c fw.lib +-fixed.obj
+	@cd ..
+
+fw\fontptrs.obj:	fw\fontptrs.c .AUTODEPEND
+	@echo Fontptrs
+	@cd fw
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) fontptrs.c
+	@wlib -q -c fw.lib +-fontptrs.obj
+	@cd ..
+
+fw\fwsetup.obj:	fw\fwsetup.c .AUTODEPEND
+	@echo Fwsetup
+	@cd fw
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) fwsetup.c
+	@wlib -q -c fw.lib +-fwsetup.obj
+	@cd ..
+
+fw\light24.obj:	fw\light24.c .AUTODEPEND
+	@echo Light24
+	@cd fw
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) light24.c
+	@wlib -q -c fw.lib +-light24.obj
+	@cd ..
+
+fw\light24o.obj:	fw\light24o.c .AUTODEPEND
+	@echo Light24o
+	@cd fw
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) light24o.c
+	@wlib -q -c fw.lib +-light24o.obj
+	@cd ..
+
+fw\light8.obj:	fw\light8.c .AUTODEPEND
+	@echo Light8
+	@cd fw
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) light8.c
+	@wlib -q -c fw.lib +-light8.obj
+	@cd ..
+
+fw\light8o.obj:	fw\light8o.c .AUTODEPEND
+	@echo Light8o
+	@cd fw
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) light8o.c
+	@wlib -q -c fw.lib +-light8o.obj
+	@cd ..
+
+fw\loader.obj:	fw\loader.c .AUTODEPEND
+	@echo Loader
+	@cd fw
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) loader.c
+	@wlib -q -c fw.lib +-loader.obj
+	@cd ..
+
+fw\logprint.obj:	fw\logprint.c .AUTODEPEND
+	@echo Logprint
+	@cd fw
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) logprint.c
+	@wlib -q -c fw.lib +-logprint.obj
+	@cd ..
+
+fw\matrix23.obj:	fw\matrix23.c .AUTODEPEND
+	@echo Matrix23
+	@cd fw
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) matrix23.c
+	@wlib -q -c fw.lib +-matrix23.obj
+	@cd ..
+
+fw\matrix34.obj:	fw\matrix34.c .AUTODEPEND
+	@echo Matrix34
+	@cd fw
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) matrix34.c
+	@wlib -q -c fw.lib +-matrix34.obj
+	@cd ..
+
+fw\matrix4.obj:	fw\matrix4.c .AUTODEPEND
+	@echo Matrix4
+	@cd fw
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) matrix4.c
+	@wlib -q -c fw.lib +-matrix4.obj
+	@cd ..
+
+fw\matrixc.obj:	fw\matrixc.c .AUTODEPEND
+	@echo Matrixc
+	@cd fw
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) matrixc.c
+	@wlib -q -c fw.lib +-matrixc.obj
+	@cd ..
+
+fw\mem.obj:	fw\mem.c .AUTODEPEND
+	@echo Mem
+	@cd fw
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) mem.c
+	@wlib -q -c fw.lib +-mem.obj
+	@cd ..
+
+fw\ofileops.obj:	fw\ofileops.c .AUTODEPEND
+	@echo Ofileops
+	@cd fw
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) ofileops.c
+	@wlib -q -c fw.lib +-ofileops.obj
+	@cd ..
+
+fw\onscreen.obj:	fw\onscreen.c .AUTODEPEND
+	@echo Onscreen
+	@cd fw
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) onscreen.c
+	@wlib -q -c fw.lib +-onscreen.obj
+	@cd ..
+
+fw\pick.obj:	fw\pick.c .AUTODEPEND
+	@echo Pick
+	@cd fw
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) pick.c
+	@wlib -q -c fw.lib +-pick.obj
+	@cd ..
+
+fw\pixelmap.obj:	fw\pixelmap.c .AUTODEPEND
+	@echo Pixelmap
+	@cd fw
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) pixelmap.c
+	@wlib -q -c fw.lib +-pixelmap.obj
+	@cd ..
+
+fw\pmdsptch.obj:	fw\pmdsptch.c .AUTODEPEND
+	@echo Pmdsptch
+	@cd fw
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) pmdsptch.c
+	@wlib -q -c fw.lib +-pmdsptch.obj
+	@cd ..
+
+fw\pmgenops.obj:	fw\pmgenops.c .AUTODEPEND
+	@echo Pmgenops
+	@cd fw
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) pmgenops.c
+	@wlib -q -c fw.lib +-pmgenops.obj
+	@cd ..
+
+fw\pool.obj:	fw\pool.c .AUTODEPEND
+	@echo Pool
+	@cd fw
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) pool.c
+	@wlib -q -c fw.lib +-pool.obj
+	@cd ..
+
+fw\prelight.obj:	fw\prelight.c .AUTODEPEND
+	@echo Prelight
+	@cd fw
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) prelight.c
+	@wlib -q -c fw.lib +-prelight.obj
+	@cd ..
+
+fw\prepmap.obj:	fw\prepmap.c .AUTODEPEND
+	@echo Prepmap
+	@cd fw
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) prepmap.c
+	@wlib -q -c fw.lib +-prepmap.obj
+	@cd ..
+
+fw\preptab.obj:	fw\preptab.c .AUTODEPEND
+	@echo Preptab
+	@cd fw
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) preptab.c
+	@wlib -q -c fw.lib +-preptab.obj
+	@cd ..
+
+fw\pmmemops.obj:	fw\pmmemops.c .AUTODEPEND
+	@echo Pmmemops
+	@cd fw
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) pmmemops.c
+	@wlib -q -c fw.lib +-pmmemops.obj
+	@cd ..
+
+fw\prepmatl.obj:	fw\prepmatl.c .AUTODEPEND
+	@echo Prepmatl
+	@cd fw
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) prepmatl.c
+	@wlib -q -c fw.lib +-prepmatl.obj
+	@cd ..
+
+fw\prepmesh.obj:	fw\prepmesh.c .AUTODEPEND
+	@echo Prepmesh
+	@cd fw
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) prepmesh.c
+	@wlib -q -c fw.lib +-prepmesh.obj
+	@cd ..
+
+fw\quat.obj:	fw\quat.c .AUTODEPEND
+	@echo Quat
+	@cd fw
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) quat.c
+	@wlib -q -c fw.lib +-quat.obj
+	@cd ..
+
+fw\quantize.obj:	fw\quantize.c .AUTODEPEND
+	@echo Quantize
+	@cd fw
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) quantize.c
+	@wlib -q -c fw.lib +-quantize.obj
+	@cd ..
+
+fw\register.obj:	fw\register.c .AUTODEPEND
+	@echo Register
+	@cd fw
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) register.c
+	@wlib -q -c fw.lib +-register.obj
+	@cd ..
+
+fw\regsupt.obj:	fw\regsupt.c .AUTODEPEND
+	@echo Regsupt
+	@cd fw
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) regsupt.c
+	@wlib -q -c fw.lib +-regsupt.obj
+	@cd ..
+
+fw\resource.obj:	fw\resource.c .AUTODEPEND
+	@echo Resource
+	@cd fw
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) resource.c
+	@wlib -q -c fw.lib +-resource.obj
+	@cd ..
+
+fw\scalar.obj:	fw\scalar.c .AUTODEPEND
+	@echo Scalar
+	@cd fw
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) scalar.c
+	@wlib -q -c fw.lib +-scalar.obj
+	@cd ..
+
+fw\scale.obj:	fw\scale.c .AUTODEPEND
+	@echo Scale
+	@cd fw
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) scale.c
+	@wlib -q -c fw.lib +-scale.obj
+	@cd ..
+
+fw\scratch.obj:	fw\scratch.c .AUTODEPEND
+	@echo Scratch
+	@cd fw
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) scratch.c
+	@wlib -q -c fw.lib +-scratch.obj
+	@cd ..
+
+fw\scrstr.obj:	fw\scrstr.c .AUTODEPEND
+	@echo Scrstr
+	@cd fw
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) scrstr.c
+	@wlib -q -c fw.lib +-scrstr.obj
+	@cd ..
+
+fw\surface.obj:	fw\surface.c .AUTODEPEND
+	@echo Surface
+	@cd fw
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) surface.c
+	@wlib -q -c fw.lib +-surface.obj
+	@cd ..
+
+fw\transfrm.obj:	fw\transfrm.c .AUTODEPEND
+	@echo Transfrm
+	@cd fw
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) transfrm.c
+	@wlib -q -c fw.lib +-transfrm.obj
+	@cd ..
+
+fw\vector.obj:	fw\vector.c .AUTODEPEND
+	@echo Vector
+	@cd fw
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) vector.c
+	@wlib -q -c fw.lib +-vector.obj
+	@cd ..
+
+fw\fixed386.obj:	fw\fixed386.asm
+	@echo Fixed386 (asm)
+	@cd fw
+	@$(asm) $(asmopts) fixed386.asm
+	@wlib -q -c fw.lib +-fixed386.obj
+	@cd ..
+
+fw\fxadc386.obj:	fw\fxadc386.asm
+	@echo Fxadc386 (asm)
+	@cd fw
+	@$(asm) $(asmopts) fxadc386.asm
+	@wlib -q -c fw.lib +-fxadc386.obj
+	@cd ..
+
+fw\blockops.obj:	fw\blockops.asm
+	@echo Blockops (asm)
+	@cd fw
+	@$(asm) $(asmopts) blockops.asm
+	@wlib -q -c fw.lib +-blockops.obj
+	@cd ..
+
+fw\magicsym.obj:	fw\magicsym.asm
+	@echo Magicsym (asm)
+	@cd fw
+	@$(asm) $(asmopts) magicsym.asm
+	@wlib -q -c fw.lib +-magicsym.obj
+	@cd ..
+
+fw\fnt3x5.obj:	fw\fnt3x5.asm
+	@echo Fnt3x5 (asm)
+	@cd fw
+	@$(asm) $(asmopts) fnt3x5.asm
+	@wlib -q -c fw.lib +-fnt3x5.obj
+	@cd ..
+
+fw\fntp4x6.obj:	fw\fntp4x6.asm
+	@echo Fntp4x6 (asm)
+	@cd fw
+	@$(asm) $(asmopts) fntp4x6.asm
+	@wlib -q -c fw.lib +-fntp4x6.obj
+	@cd ..
+
+fw\fntp7x9.obj:	fw\fntp7x9.asm
+	@echo Fntp7x9 (asm)
+	@cd fw
+	@$(asm) $(asmopts) fntp7x9.asm
+	@wlib -q -c fw.lib +-fntp7x9.obj
+	@cd ..
+
+fw\memloops.obj:	fw\memloops.asm
+	@echo Memloops (asm)
+	@cd fw
+	@$(asm) $(asmopts) memloops.asm
+	@wlib -q -c fw.lib +-memloops.obj
+	@cd ..
+
+dosio\dosgfx.obj:	dosio\dosgfx.c .AUTODEPEND
+	@echo Dosgfx
+	@cd dosio
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) dosgfx.c
+	@wlib -q -c dosio.lib +-dosgfx.obj
+	@cd ..
+
+dosio\dosgfxcm.obj:	dosio\dosgfxcm.c .AUTODEPEND
+	@echo Dosgfxcm
+	@cd dosio
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) dosgfxcm.c
+	@wlib -q -c dosio.lib +-dosgfxcm.obj
+	@cd ..
+
+dosio\mcga.obj:	dosio\mcga.c .AUTODEPEND
+	@echo Mcga
+	@cd dosio
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) mcga.c
+	@wlib -q -c dosio.lib +-mcga.obj
+	@cd ..
+
+dosio\readmse.obj:	dosio\readmse.c .AUTODEPEND
+	@echo Readmse
+	@cd dosio
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) readmse.c
+	@wlib -q -c dosio.lib +-readmse.obj
+	@cd ..
+
+dosio\keyboard.obj:	dosio\keyboard.c .AUTODEPEND
+	@echo Keyboard
+	@cd dosio
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) keyboard.c
+	@wlib -q -c dosio.lib +-keyboard.obj
+	@cd ..
+
+dosio\vesa.obj:	dosio\vesa.c .AUTODEPEND
+	@echo Vesa
+	@cd dosio
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) vesa.c
+	@wlib -q -c dosio.lib +-vesa.obj
+	@cd ..
+
+dosio\vesaops.obj:	dosio\vesaops.c .AUTODEPEND
+	@echo Vesaops
+	@cd dosio
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) vesaops.c
+	@wlib -q -c dosio.lib +-vesaops.obj
+	@cd ..
+
+dosio\getenv.obj:	dosio\getenv.c .AUTODEPEND
+	@echo Getenv
+	@cd dosio
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) getenv.c
+	@wlib -q -c dosio.lib +-getenv.obj
+	@cd ..
+
+dosio\dosdiag.obj:	dosio\dosdiag.c .AUTODEPEND
+	@echo Dosdiag
+	@cd dosio
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) dosdiag.c
+	@wlib -q -c dosio.lib +-dosdiag.obj
+	@cd ..
+
+dosio\eventq.obj:	dosio\eventq.c .AUTODEPEND
+	@echo Eventq
+	@cd dosio
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) eventq.c
+	@wlib -q -c dosio.lib +-eventq.obj
+	@cd ..
+
+dosio\realvec.obj:	dosio\realvec.c .AUTODEPEND
+	@echo Realvec
+	@cd dosio
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) realvec.c
+	@wlib -q -c dosio.lib +-realvec.obj
+	@cd ..
+
+dosio\clock.obj:	dosio\clock.asm
+	@echo Clock (asm)
+	@cd dosio
+	@$(asm) $(asmopts) $(dosioasmopts) clock.asm
+	@wlib -q -c dosio.lib +-clock.obj
+	@cd ..
+
+dosio\segregs.obj:	dosio\segregs.asm
+	@echo Segregs (asm)
+	@cd dosio
+	@$(asm) $(asmopts) $(dosioasmopts) segregs.asm
+	@wlib -q -c dosio.lib +-segregs.obj
+	@cd ..
+
+dosio\divtrap.obj:	dosio\divtrap.asm
+	@echo Divtrap (asm)
+	@cd dosio
+	@$(asm) $(asmopts) $(dosioasmopts) divtrap.asm
+	@wlib -q -c dosio.lib +-divtrap.obj
+	@cd ..
+
+dosio\realsupt.obj:	dosio\realsupt.asm
+	@echo Realsupt (asm)
+	@cd dosio
+	@$(asm) $(asmopts) $(dosioasmopts) realsupt.asm
+	@wlib -q -c dosio.lib +-realsupt.obj
+	@cd ..
+
+dosio\vesaloop.obj:	dosio\vesaloop.asm
+	@echo Vesaloop (asm)
+	@cd dosio
+	@$(asm) $(asmopts) $(dosioasmopts) vesaloop.asm
+	@wlib -q -c dosio.lib +-vesaloop.obj
+	@cd ..
+
+dosio\vesaapi.obj:	dosio\vesaapi.asm
+	@echo Vesaapi (asm)
+	@cd dosio
+	@$(asm) $(asmopts) $(dosioasmopts) vesaapi.asm
+	@wlib -q -c dosio.lib +-vesaapi.obj
+	@cd ..
+
+dosio\farmem.obj:	dosio\farmem.asm
+	@echo Farmem (asm)
+	@cd dosio
+	@$(asm) $(asmopts) $(dosioasmopts) farmem.asm
+	@wlib -q -c dosio.lib +-farmem.obj
+	@cd ..
+
+zb\awtmz.obj:	zb\awtmz.c .AUTODEPEND
+	@echo Awtmz
+	@cd zb
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) awtmz.c
+	@wlib -q -c zb.lib +-awtmz.obj
+	@cd ..
+
+zb\bbox.obj:	zb\bbox.c .AUTODEPEND
+	@echo Bbox
+	@cd zb
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) bbox.c
+	@wlib -q -c zb.lib +-bbox.obj
+	@cd ..
+
+zb\decalz.obj:	zb\decalz.c .AUTODEPEND
+	@echo Decalz
+	@cd zb
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) decalz.c
+	@wlib -q -c zb.lib +-decalz.obj
+	@cd ..
+
+zb\frcp.obj:	zb\frcp.c .AUTODEPEND
+	@echo Frcp
+	@cd zb
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) frcp.c
+	@wlib -q -c zb.lib +-frcp.obj
+	@cd ..
+
+zb\l_piz.obj:	zb\l_piz.c .AUTODEPEND
+	@echo Lpiz
+	@cd zb
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) l_piz.c
+	@wlib -q -c zb.lib +-l_piz.obj
+	@cd ..
+
+zb\p_piz.obj:	zb\p_piz.c .AUTODEPEND
+	@echo P_piz
+	@cd zb
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) p_piz.c
+	@wlib -q -c zb.lib +-p_piz.obj
+	@cd ..
+
+zb\perspz.obj:	zb\perspz.c .AUTODEPEND
+	@echo Perspz
+	@cd zb
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) perspz.c
+	@wlib -q -c zb.lib +-perspz.obj
+	@cd ..
+
+zb\dither.obj:	zb\dither.c .AUTODEPEND
+	@echo Dither
+	@cd zb
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) dither.c
+	@wlib -q -c zb.lib +-dither.obj
+	@cd ..
+
+zb\zbclip.obj:	zb\zbclip.c .AUTODEPEND
+	@echo Zbclip
+	@cd zb
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) zbclip.c
+	@wlib -q -c zb.lib +-zbclip.obj
+	@cd ..
+
+zb\zbmatl.obj:	zb\zbmatl.c .AUTODEPEND
+	@echo Zbmatl
+	@cd zb
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) zbmatl.c
+	@wlib -q -c zb.lib +-zbmatl.obj
+	@cd ..
+
+zb\zbmesh.obj:	zb\zbmesh.c .AUTODEPEND
+	@echo Zbmesh
+	@cd zb
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) zbmesh.c
+	@wlib -q -c zb.lib +-zbmesh.obj
+	@cd ..
+
+zb\zbmeshe.obj:	zb\zbmeshe.c .AUTODEPEND
+	@echo Zbmeshe
+	@cd zb
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) zbmeshe.c
+	@wlib -q -c zb.lib +-zbmeshe.obj
+	@cd ..
+
+zb\zbmeshp.obj:	zb\zbmeshp.c .AUTODEPEND
+	@echo Zbmeshp
+	@cd zb
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) zbmeshp.c
+	@wlib -q -c zb.lib +-zbmeshp.obj
+	@cd ..
+
+zb\zbrendr.obj:	zb\zbrendr.c .AUTODEPEND
+	@echo Zbrendr
+	@cd zb
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) zbrendr.c
+	@wlib -q -c zb.lib +-zbrendr.obj
+	@cd ..
+
+zb\zbsetup.obj:	zb\zbsetup.c .AUTODEPEND
+	@echo Zbsetup
+	@cd zb
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) zbsetup.c
+	@wlib -q -c zb.lib +-zbsetup.obj
+	@cd ..
+
+
+zb\zb.inc:	zb\zb.h
+	@echo Zb.inc
+	@cd zb
+	@$(h2inc) $(h2incopts) zb.h
+	@cd ..
+
+zb\mesh386.obj:	zb\mesh386.asm zb\zb.inc
+	@echo Mesh386 (asm)
+	@cd zb
+	@$(asm) $(asmopts) $(zbasmopts) mesh386.asm
+	@wlib -q -c zb.lib +-mesh386.obj
+	@cd ..
+
+zb\safediv.obj:	zb\safediv.asm
+	@echo Safediv (asm)
+	@cd zb
+	@$(asm) $(asmopts) $(zbasmopts) safediv.asm
+	@wlib -q -c zb.lib +-safediv.obj
+	@cd ..
+
+zb\sar16.obj:	zb\sar16.asm
+	@echo Sar16 (asm)
+	@cd zb
+	@$(asm) $(asmopts) $(zbasmopts) sar16.asm
+	@wlib -q -c zb.lib +-sar16.obj
+	@cd ..
+
+zb\t_piza.obj:	zb\t_piza.asm zb\zb.inc
+	@echo T_piza (asm)
+	@cd zb
+	@$(asm) $(asmopts) $(zbasmopts) t_piza.asm
+	@wlib -q -c zb.lib +-t_piza.obj
+	@cd ..
+
+zb\ti8_piz.obj:	zb\ti8_piz.asm zb\zb.inc
+	@echo Ti8_piz (asm)
+	@cd zb
+	@$(asm) $(asmopts) $(zbasmopts) ti8_piz.asm
+	@wlib -q -c zb.lib +-ti8_piz.obj
+	@cd ..
+
+zb\ti8_pizp.obj:	zb\ti8_pizp.asm zb\zb.inc
+	@echo Ti8_pizp (asm)
+	@cd zb
+	@$(asm) $(asmopts) $(zbasmopts) ti8_pizp.asm
+	@wlib -q -c zb.lib +-ti8_pizp.obj
+	@cd ..
+
+zb\tt15_piz.obj:	zb\tt15_piz.asm zb\zb.inc
+	@echo Tt15_piz (asm)
+	@cd zb
+	@$(asm) $(asmopts) $(zbasmopts) tt15_piz.asm
+	@wlib -q -c zb.lib +-tt15_piz.obj
+	@cd ..
+
+zb\tt24_piz.obj:	zb\tt24_piz.asm zb\zb.inc
+	@echo Tt24_piz (asm)
+	@cd zb
+	@$(asm) $(asmopts) $(zbasmopts) tt24_piz.asm
+	@wlib -q -c zb.lib +-tt24_piz.obj
+	@cd ..
+
+fmt\loadnff.obj:	fmt\loadnff.c .AUTODEPEND
+	@echo Loadnff
+	@cd fmt
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) loadnff.c
+	@wlib -q -c fmt.lib +-loadnff.obj
+	@cd ..
+
+fmt\loadasc.obj:	fmt\loadasc.c .AUTODEPEND
+	@echo Loadasc
+	@cd fmt
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) loadasc.c
+	@wlib -q -c fmt.lib +-loadasc.obj
+	@cd ..
+
+fmt\loadscr.obj:	fmt\loadscr.c .AUTODEPEND
+	@echo Loadscr
+	@cd fmt
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) loadscr.c
+	@wlib -q -c fmt.lib +-loadscr.obj
+	@cd ..
+
+fmt\loadgif.obj:	fmt\loadgif.c .AUTODEPEND
+	@echo Loadgif
+	@cd fmt
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) loadgif.c
+	@wlib -q -c fmt.lib +-loadgif.obj
+	@cd ..
+
+fmt\loadiff.obj:	fmt\loadiff.c .AUTODEPEND
+	@echo Loadiff
+	@cd fmt
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) loadiff.c
+	@wlib -q -c fmt.lib +-loadiff.obj
+	@cd ..
+
+fmt\loadbmp.obj:	fmt\loadbmp.c .AUTODEPEND
+	@echo Loadbmp
+	@cd fmt
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) loadbmp.c
+	@wlib -q -c fmt.lib +-loadbmp.obj
+	@cd ..
+
+fmt\loadtga.obj:	fmt\loadtga.c .AUTODEPEND
+	@echo Loadtga
+	@cd fmt
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) loadtga.c
+	@wlib -q -c fmt.lib +-loadtga.obj
+	@cd ..
+
+fmt\savescr.obj:	fmt\savescr.c .AUTODEPEND
+	@echo Savescr
+	@cd fmt
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) savescr.c
+	@wlib -q -c fmt.lib +-savescr.obj
+	@cd ..
+
+std\stdfile.obj:	std\stdfile.c .AUTODEPEND
+	@echo Stdfile
+	@cd std
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) stdfile.c
+	@wlib -q -c std.lib +-stdfile.obj
+	@cd ..
+
+std\stdmem.obj:	std\stdmem.c .AUTODEPEND
+	@echo Stdmem
+	@cd std
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) stdmem.c
+	@wlib -q -c std.lib +-stdmem.obj
+	@cd ..
+
+std\stddiag.obj:	std\stddiag.c .AUTODEPEND
+	@echo Stddiag
+	@cd std
+	@$(cc) $(ccopts) $(debug) $(optimise) $(brstuff) stddiag.c
+	@wlib -q -c std.lib +-stddiag.obj
+	@cd ..
+
+##############################################################################
+#	General Rules
+##############################################################################
+
+clean: .SYMBOLIC
+	@cd fw
+	@if exist *.obj @del *.obj
+	@if exist *.pch @del *.pch
+	@if exist *.smp @del *.smp
+	@if exist *.lib @del *.lib
+	@cd ..
+	@cd dosio
+	@if exist *.obj @del *.obj
+	@if exist *.pch @del *.pch
+	@if exist *.smp @del *.smp
+	@if exist *.lib @del *.lib
+	@cd ..
+	@cd zb
+	@if exist *.obj @del *.obj
+	@if exist *.pch @del *.pch
+	@if exist *.smp @del *.smp
+	@if exist *.lib @del *.lib
+	@cd ..
+	@cd fmt
+	@if exist *.obj @del *.obj
+	@if exist *.pch @del *.pch
+	@if exist *.smp @del *.smp
+	@if exist *.lib @del *.lib
+	@cd ..
+	@cd std
+	@if exist *.obj @del *.obj
+	@if exist *.pch @del *.pch
+	@if exist *.smp @del *.smp
+	@if exist *.lib @del *.lib
+	@cd ..
+	@echo Clean
+
+buildopt: .SYMBOLIC
+	wmake clean
+	wmake OPTIMIZE=1 NODEBUG=1
+	@echo Built Optimize
+
+buildprof:  .SYMBOLIC
+	wmake clean
+	wmake OPTIMIZE=1
+	@echo Built Profile
+
+debug: .SYMBOLIC
+	wd /v /tr=rsi /swap dark.exe
+
+debugt: .SYMBOLIC
+	wd /v /tr=rsi /swap testbed.exe
+
+opt:	.SYMBOLIC
+	wmake OPTIMIZE=1 NODEBUG=1
+
+profile:  .SYMBOLIC
+	wsamprsi dark.exe
+	call setvid
+	wprof dark
+
+profilet:  .SYMBOLIC
+	wsamprsi testbed.exe
+	call setvid
+	wprof testbed
+
+release: .SYMBOLIC
+	@echo Releasing
+	@echo FW
+	@copy fw\fw.lib \dark\br\lib\brfwwfrr.lib
+	@echo DOSIO
+	@copy dosio\dosio.lib \dark\br\lib\dio4gwrr.lib
+	@echo ZB
+	@copy zb\zb.lib \dark\br\lib\brzbwfrr.lib
+	@echo FMT
+	@copy fmt\fmt.lib \dark\br\lib\brfmwfrr.lib
+	@echo STD
+	@copy std\std.lib \dark\br\lib\brstwfrr.lib
+	@echo Done
+	
+
