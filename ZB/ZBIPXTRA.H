@@ -1,0 +1,108 @@
+
+/*
+ * Copyright (c) 1993-1995 Argonaut Technologies Limited. All rights reserved.
+ *
+ * Extra glue for C<->ASM generated via gemasmpr.pl
+ */
+
+#ifdef __cplusplus
+	extern "C" {
+#endif
+
+#ifdef __IBMC__
+#pragma map(zb,"_zb")
+#pragma map(TriangleRenderPFZ2,"_TriangleRenderPFZ2")
+#pragma map(TriangleRenderPFZ2I,"_TriangleRenderPFZ2I")
+#pragma map(TriangleRenderPFZ2T,"_TriangleRenderPFZ2T")
+#pragma map(TriangleRenderPFZ2TI,"_TriangleRenderPFZ2TI")
+#pragma map(TriangleRenderPIZ2,"_TriangleRenderPIZ2")
+#pragma map(TriangleRenderPIZ2I,"_TriangleRenderPIZ2I")
+#pragma map(TriangleRenderPIZ2T,"_TriangleRenderPIZ2T")
+#pragma map(TriangleRenderPIZ2TB,"_TriangleRenderPIZ2TB")
+#pragma map(TriangleRenderPIZ2TI,"_TriangleRenderPIZ2TI")
+#pragma map(TriangleRenderPIZ2_RGB_888,"_TriangleRenderPIZ2_RGB_888")
+#pragma map(TriangleRenderPIZ2I_RGB_888,"_TriangleRenderPIZ2I_RGB_888")
+#pragma map(TriangleRenderPIZ2_RGB_555,"_TriangleRenderPIZ2_RGB_555")
+#pragma map(TriangleRenderPIZ2I_RGB_555,"_TriangleRenderPIZ2I_RGB_555")
+#pragma map(TriangleRenderPIZ2TIP1024,"_TriangleRenderPIZ2TIP1024")
+#pragma map(TriangleRenderPIZ2TIP256,"_TriangleRenderPIZ2TIP256")
+#pragma map(TriangleRenderPIZ2TIP64,"_TriangleRenderPIZ2TIP64")
+#pragma map(TriangleRenderPIZ2TP1024,"_TriangleRenderPIZ2TP1024")
+#pragma map(TriangleRenderPIZ2TP256,"_TriangleRenderPIZ2TP256")
+#pragma map(TriangleRenderPIZ2TP64,"_TriangleRenderPIZ2TP64")
+#pragma map(TriangleRenderPIZ2TA,"_TriangleRenderPIZ2TA")
+#pragma map(TriangleRenderPIZ2TIA,"_TriangleRenderPIZ2TIA")
+#pragma map(TriangleRenderPIZ2TA15,"_TriangleRenderPIZ2TA15")
+#pragma map(TriangleRenderPIZ2TA24,"_TriangleRenderPIZ2TA24")
+#pragma map(OSFFVGroupCulled_A,"_OSFFVGroupCulled_A")
+#pragma map(OSFFVGroupCulledLit_A,"_OSFFVGroupCulledLit_A")
+#pragma map(OSTVGroup_A,"_OSTVGroup_A")
+#pragma map(OSTVGroupLit_A,"_OSTVGroupLit_A")
+#pragma map(OSTVGroupBC_A,"_OSTVGroupBC_A")
+#pragma map(OSTVGroupLitBC_A,"_OSTVGroupLitBC_A")
+#pragma map(OSCopyModelToScreen_A,"_OSCopyModelToScreen_A")
+#pragma map(_sar16,"__sar16")
+#pragma map(TrapezoidRenderPIZ2TIA,"_TrapezoidRenderPIZ2TIA")
+#pragma map(TrapezoidRenderPIZ2TA,"_TrapezoidRenderPIZ2TA")
+#pragma map(TrapezoidRenderPIZ2TA15,"_TrapezoidRenderPIZ2TA15")
+#pragma map(TrapezoidRenderPIZ2TA24,"_TrapezoidRenderPIZ2TA24")
+#pragma map(SafeFixedMac2Div,"_SafeFixedMac2Div")
+#pragma map(awsl,"_awsl")
+#pragma map(ScanLinePIZ2TIP256,"_ScanLinePIZ2TIP256")
+#pragma map(ScanLinePIZ2TIP64,"_ScanLinePIZ2TIP64")
+#pragma map(ScanLinePIZ2TP1024,"_ScanLinePIZ2TP1024")
+#pragma map(ScanLinePIZ2TP256,"_ScanLinePIZ2TP256")
+#pragma map(ScanLinePIZ2TP64,"_ScanLinePIZ2TP64")
+#pragma map(tsl,"_tsl")
+#endif /* __IBMC__ */
+
+#ifdef __HIGHC__
+#pragma Alias(zb,"_zb")
+#pragma Alias(TriangleRenderPFZ2,"_TriangleRenderPFZ2")
+#pragma Alias(TriangleRenderPFZ2I,"_TriangleRenderPFZ2I")
+#pragma Alias(TriangleRenderPFZ2T,"_TriangleRenderPFZ2T")
+#pragma Alias(TriangleRenderPFZ2TI,"_TriangleRenderPFZ2TI")
+#pragma Alias(TriangleRenderPIZ2,"_TriangleRenderPIZ2")
+#pragma Alias(TriangleRenderPIZ2I,"_TriangleRenderPIZ2I")
+#pragma Alias(TriangleRenderPIZ2T,"_TriangleRenderPIZ2T")
+#pragma Alias(TriangleRenderPIZ2TB,"_TriangleRenderPIZ2TB")
+#pragma Alias(TriangleRenderPIZ2TI,"_TriangleRenderPIZ2TI")
+#pragma Alias(TriangleRenderPIZ2_RGB_888,"_TriangleRenderPIZ2_RGB_888")
+#pragma Alias(TriangleRenderPIZ2I_RGB_888,"_TriangleRenderPIZ2I_RGB_888")
+#pragma Alias(TriangleRenderPIZ2_RGB_555,"_TriangleRenderPIZ2_RGB_555")
+#pragma Alias(TriangleRenderPIZ2I_RGB_555,"_TriangleRenderPIZ2I_RGB_555")
+#pragma Alias(TriangleRenderPIZ2TIP1024,"_TriangleRenderPIZ2TIP1024")
+#pragma Alias(TriangleRenderPIZ2TIP256,"_TriangleRenderPIZ2TIP256")
+#pragma Alias(TriangleRenderPIZ2TIP64,"_TriangleRenderPIZ2TIP64")
+#pragma Alias(TriangleRenderPIZ2TP1024,"_TriangleRenderPIZ2TP1024")
+#pragma Alias(TriangleRenderPIZ2TP256,"_TriangleRenderPIZ2TP256")
+#pragma Alias(TriangleRenderPIZ2TP64,"_TriangleRenderPIZ2TP64")
+#pragma Alias(TriangleRenderPIZ2TA,"_TriangleRenderPIZ2TA")
+#pragma Alias(TriangleRenderPIZ2TIA,"_TriangleRenderPIZ2TIA")
+#pragma Alias(TriangleRenderPIZ2TA15,"_TriangleRenderPIZ2TA15")
+#pragma Alias(TriangleRenderPIZ2TA24,"_TriangleRenderPIZ2TA24")
+#pragma Alias(OSFFVGroupCulled_A,"_OSFFVGroupCulled_A")
+#pragma Alias(OSFFVGroupCulledLit_A,"_OSFFVGroupCulledLit_A")
+#pragma Alias(OSTVGroup_A,"_OSTVGroup_A")
+#pragma Alias(OSTVGroupLit_A,"_OSTVGroupLit_A")
+#pragma Alias(OSTVGroupBC_A,"_OSTVGroupBC_A")
+#pragma Alias(OSTVGroupLitBC_A,"_OSTVGroupLitBC_A")
+#pragma Alias(OSCopyModelToScreen_A,"_OSCopyModelToScreen_A")
+#pragma Alias(_sar16,"__sar16")
+#pragma Alias(TrapezoidRenderPIZ2TIA,"_TrapezoidRenderPIZ2TIA")
+#pragma Alias(TrapezoidRenderPIZ2TA,"_TrapezoidRenderPIZ2TA")
+#pragma Alias(TrapezoidRenderPIZ2TA15,"_TrapezoidRenderPIZ2TA15")
+#pragma Alias(TrapezoidRenderPIZ2TA24,"_TrapezoidRenderPIZ2TA24")
+#pragma Alias(SafeFixedMac2Div,"_SafeFixedMac2Div")
+#pragma Alias(awsl,"_awsl")
+#pragma Alias(ScanLinePIZ2TIP256,"_ScanLinePIZ2TIP256")
+#pragma Alias(ScanLinePIZ2TIP64,"_ScanLinePIZ2TIP64")
+#pragma Alias(ScanLinePIZ2TP1024,"_ScanLinePIZ2TP1024")
+#pragma Alias(ScanLinePIZ2TP256,"_ScanLinePIZ2TP256")
+#pragma Alias(ScanLinePIZ2TP64,"_ScanLinePIZ2TP64")
+#pragma Alias(tsl,"_tsl")
+#endif /* __IBMC__ */
+
+#ifdef __cplusplus
+	};
+#endif

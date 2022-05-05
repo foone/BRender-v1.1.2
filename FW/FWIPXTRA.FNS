@@ -1,0 +1,22 @@
+# Copyright (c) 1993-1995 Argonaut Technologies Limited. All rights reserved.
+#
+# $Id: fwipxtra.fns 1.1 1995/05/25 13:32:44 sam Exp $
+# $Locker:  $
+#
+# List of functions that need per compiler C<-> ASM glue
+#
+
+_reciprocal
+fw
+BrFixedAddCarry
+_FontFixed3x5
+_FontProp4x6
+_FontProp7x9
+_MemCopyBits_A
+_MemFill_A
+_MemRectFill_A
+_MemCopy_A
+_MemRectCopy_A
+_MemPlot
+_GetSysQual
+

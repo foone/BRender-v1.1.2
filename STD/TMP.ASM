@@ -1,0 +1,71 @@
+.386p
+                NAME    stddiag
+                EXTERNDEF   _exit :BYTE
+                EXTERNDEF   _fputc :BYTE
+                EXTERNDEF   _fputs :BYTE
+                EXTERNDEF   _fflush :BYTE
+                EXTERNDEF   __iob :BYTE
+DGROUP          GROUP   CONST,CONST2,_DATA,_BSS
+_TEXT           SEGMENT PARA PUBLIC USE32 'CODE'
+                ASSUME  CS:_TEXT ,DS:DGROUP,SS:DGROUP
+_BrStdioWarning: push    offset __iob(+20H)
+                call    near ptr _fflush
+                add     esp,00000004H
+                push    offset __iob(+40H)
+                mov     edx,dword ptr (+8H)[esp]
+                push    edx
+                call    near ptr _fputs
+                add     esp,00000008H
+                push    offset __iob(+40H)
+                push    0000000aH
+                call    near ptr _fputc
+                add     esp,00000008H
+                push    offset __iob(+40H)
+                call    near ptr _fflush
+                add     esp,00000004H
+                ret     
+_BrStdioFailure: push    offset __iob(+20H)
+                call    near ptr _fflush
+                add     esp,00000004H
+                push    offset __iob(+40H)
+                mov     edx,dword ptr (+8H)[esp]
+                push    edx
+                call    near ptr _fputs
+                add     esp,00000008H
+                push    offset __iob(+40H)
+                push    0000000aH
+                call    near ptr _fputc
+                add     esp,00000008H
+                push    offset __iob(+40H)
+                call    near ptr _fflush
+                add     esp,00000004H
+                push    0000000aH
+                call    near ptr _exit
+                add     esp,00000004H
+                ret     
+_TEXT           ENDS
+
+CONST           SEGMENT DWORD PUBLIC USE32 'DATA'
+L1              DB      53H,74H,64H,69H,6fH,20H,44H,69H
+                DB      61H,67H,48H,61H,6eH,64H,6cH,65H
+                DB      72H,00H
+CONST           ENDS
+
+CONST2          SEGMENT DWORD PUBLIC USE32 'DATA'
+CONST2          ENDS
+
+_DATA           SEGMENT DWORD PUBLIC USE32 'DATA'
+                PUBLIC  _BrStdioDiagHandler 
+                PUBLIC  __BrDefaultDiagHandler 
+_BrStdioDiagHandler LABEL BYTE
+                DD      DGROUP:L1
+                DD      _BrStdioWarning
+                DD      _BrStdioFailure
+__BrDefaultDiagHandler LABEL BYTE
+                DD      DGROUP:_BrStdioDiagHandler
+_DATA           ENDS
+
+_BSS            SEGMENT DWORD PUBLIC USE32 'BSS'
+_BSS            ENDS
+
+                END

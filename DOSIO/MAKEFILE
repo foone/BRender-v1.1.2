@@ -1,0 +1,110 @@
+# Copyright (c) 1993-1995 Argonaut Technologies Limited. All rights reserved.
+#
+# $Id: makefile 1.7 1995/07/28 18:58:50 sam Exp $
+# $Locker: sam $
+#
+# Makefile for DOS IO support libary
+#
+#
+.IMPORT: BASE_DIR MAKE_EXT
+.IMPORT .IGNORE: EXTENDER
+
+BASE_TYPE=NONE
+TARGET_TYPE:=LIB
+
+INCLUDES:=-I$(BASE_DIR)\inc -I$(BASE_DIR)\fw
+
+# Select flags and library name based on extender type
+#
+
+.IF $(EXTENDER) == PHARLAP
+
+EXTRA_CFLAGS=-D__PHARLAP386__=1
+EXTRA_ASFLAGS=-D__PHARLAP386__=1
+LIB_PART:=diopl
+BLD_BASE:=bpl
+
+.ELIF $(EXTENDER) == X32
+
+EXTRA_CFLAGS=-D__X32__=1
+EXTRA_ASFLAGS=-D__X32__=1
+LIB_PART:=diox3
+BLD_BASE:=bx3
+
+.ELIF $(EXTENDER) == X32VM
+
+EXTRA_CFLAGS=-D__X32__=1
+EXTRA_ASFLAGS=-D__X32__=1
+LIB_PART:=diox3
+BLD_BASE:=bx3
+
+.ELIF $(EXTENDER) == DOS4GW
+
+EXTRA_CFLAGS=-D__DOS4G__=1 -D__DPMI__=1
+EXTRA_ASFLAGS=-D__DOS4G__=1 -D__DPMI__=1
+LIB_PART:=dio4g
+BLD_BASE:=b4g
+
+.ELIF $(EXTENDER) == DOS4GWPRO
+
+EXTRA_CFLAGS=-D__DOS4G__=1 -D__DPMI__=1
+EXTRA_ASFLAGS=-D__DOS4G__=1 -D__DPMI__=1
+LIB_PART:=dio4g
+BLD_BASE:=b4g
+
+.ELIF $(EXTENDER) == POWERPACK
+
+EXTRA_CFLAGS=-D__POWERPACK__=1 -D__DPMI__=1 -WX
+EXTRA_ASFLAGS=-D__POWERPACK__=1 -D__DPMI__=1
+LIB_PART:=diopp
+BLD_BASE:=bpp
+
+.ELIF $(EXTENDER) == GO32
+
+EXTRA_CFLAGS=-D__GO32__=1 -D__DPMI__=1
+EXTRA_ASFLAGS=-D__GO32__=1 -D__DPMI__=1
+LIB_PART:=diodj
+BLD_BASE:=bdj
+
+.END
+
+## Base library object files
+##
+OBJS_C=\
+	$(BLD_DIR)/dosgfx$(OBJ_EXT)\
+	$(BLD_DIR)/dosgfxcm$(OBJ_EXT)\
+	$(BLD_DIR)/mcga$(OBJ_EXT)\
+	$(BLD_DIR)/readmse$(OBJ_EXT)\
+	$(BLD_DIR)/keyboard$(OBJ_EXT)\
+	$(BLD_DIR)/vesa$(OBJ_EXT)\
+	$(BLD_DIR)/vesaops$(OBJ_EXT)\
+	$(BLD_DIR)/getenv$(OBJ_EXT)\
+	$(BLD_DIR)/dosdiag$(OBJ_EXT)\
+	$(BLD_DIR)/eventq$(OBJ_EXT)\
+	$(BLD_DIR)/realvec$(OBJ_EXT)\
+
+OBJS_ASM=\
+	$(BLD_DIR)/clock$(OBJ_EXT)\
+	$(BLD_DIR)/segregs$(OBJ_EXT)\
+	$(BLD_DIR)/divtrap$(OBJ_EXT)\
+	$(BLD_DIR)/realsupt$(OBJ_EXT)\
+	$(BLD_DIR)/vesaloop$(OBJ_EXT)\
+	$(BLD_DIR)/vesaapi$(OBJ_EXT)\
+	$(BLD_DIR)/farmem$(OBJ_EXT)\
+
+.INCLUDE: $(BASE_DIR)\makedefs$(MAKE_EXT)
+
+# Special rules to build header files containing
+# real mode code
+#
+%.hex: %.asm
+	ml -c $*.asm rmeventq.asm
+	link $*.obj+rmeventq.obj,_hex.exe,_hex.map/map;
+	-exeldr _hex.exe -o _hex.out
+	perl dumpc.pl _hex.out >$@
+	perl maptodef.pl _hex.map >>$@
+	rm _hex.exe
+	rm _hex.out
+	rm _hex.map
+	
+

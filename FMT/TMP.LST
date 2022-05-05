@@ -1,0 +1,491 @@
+.386p
+                NAME    savescr
+                EXTRN   __8087 :BYTE
+                EXTRN   __init_387_emulator :BYTE
+                EXTRN   _fltused_ :BYTE
+                EXTRN   _BrFileClose :BYTE
+                EXTRN   _BrMaterialCount :BYTE
+                EXTRN   _BrMaterialEnum :BYTE
+                EXTRN   _BrFilePutLine :BYTE
+                EXTRN   _BrFileOpenWrite :BYTE
+                EXTRN   __DefaultScriptMaterial :BYTE
+                EXTRN   _BrFilePrintf :BYTE
+DGROUP          GROUP   CONST,CONST2,_DATA,_BSS
+_TEXT           SEGMENT PARA PUBLIC USE32 'CODE'
+                ASSUME  CS:_TEXT ,DS:DGROUP,SS:DGROUP
+                PUBLIC  _BrFmtScriptMaterialSaveMany 
+                PUBLIC  _BrFmtScriptMaterialSave 
+WriteScriptMaterial_:
+                push    ebx
+                push    ecx
+                push    esi
+                push    edi
+                push    ebp
+                mov     ebp,esp
+                sub     esp,00000008H
+                mov     dword ptr -8H[ebp],eax
+                mov     edi,edx
+                push    offset DGROUP:L41
+                push    edx
+                call    near ptr _BrFilePrintf
+                mov     eax,dword ptr -8H[ebp]
+                mov     edx,dword ptr [eax]
+                add     esp,00000008H
+                test    edx,edx
+                je      short L1
+                push    edx
+                push    offset DGROUP:L42
+                push    edi
+                call    near ptr _BrFilePrintf
+                add     esp,0000000cH
+L1:             mov     eax,dword ptr -8H[ebp]
+                mov     ecx,dword ptr __DefaultScriptMaterial+14H
+                cmp     ecx,dword ptr +14H[eax]
+                je      short L6
+                push    offset DGROUP:L43
+                push    edi
+                xor     esi,esi
+                xor     ebx,ebx
+                call    near ptr _BrFilePrintf
+                add     esp,00000008H
+L2:             mov     eax,dword ptr -8H[ebp]
+                mov     edx,dword ptr _MaterialFlagNames+4H[ebx]
+                test    dword ptr +14H[eax],edx
+                je      short L5
+                mov     ecx,dword ptr _MaterialFlagNames[ebx]
+                push    ecx
+                test    esi,esi
+                je      short L3
+                mov     eax,offset DGROUP:L44
+                jmp     short L4
+L3:             mov     eax,offset DGROUP:L45
+L4:             push    eax
+                push    offset DGROUP:L46
+                push    edi
+                inc     esi
+                call    near ptr _BrFilePrintf
+                add     esp,00000010H
+L5:             add     ebx,00000008H
+                cmp     ebx,00000058H
+                jne     short L2
+                push    offset DGROUP:L47
+                push    edi
+                call    near ptr _BrFilePrintf
+                add     esp,00000008H
+L6:             mov     eax,dword ptr -8H[ebp]
+                mov     esi,dword ptr __DefaultScriptMaterial+4H
+                cmp     esi,dword ptr +4H[eax]
+                je      short L7
+                mov     eax,dword ptr -8H[ebp]
+                mov     eax,dword ptr +4H[eax]
+                and     eax,000000ffH
+                push    eax
+                mov     eax,dword ptr -8H[ebp]
+                mov     eax,dword ptr +4H[eax]
+                shr     eax,08H
+                and     eax,000000ffH
+                push    eax
+                mov     eax,dword ptr -8H[ebp]
+                mov     eax,dword ptr +4H[eax]
+                shr     eax,10H
+                and     eax,000000ffH
+                push    eax
+                push    offset DGROUP:L48
+                push    edi
+                call    near ptr _BrFilePrintf
+                add     esp,00000014H
+L7:             mov     eax,dword ptr -8H[ebp]
+                mov     al,byte ptr +8H[eax]
+                cmp     al,byte ptr __DefaultScriptMaterial+8H
+                je      short L8
+                mov     edx,dword ptr -8H[ebp]
+                xor     eax,eax
+                mov     al,byte ptr +8H[edx]
+                push    eax
+                push    offset DGROUP:L49
+                push    edi
+                call    near ptr _BrFilePrintf
+                add     esp,0000000cH
+L8:             mov     eax,dword ptr -8H[ebp]
+                mov     dx,word ptr __DefaultScriptMaterial+0aH
+                cmp     dx,word ptr +0aH[eax]
+                je      short L9
+                mov     edx,dword ptr -8H[ebp]
+                xor     eax,eax
+                mov     ax,word ptr +0aH[edx]
+                mov     dword ptr -4H[ebp],eax
+                fild    dword ptr -4H[ebp]
+                fmul    dword ptr L64
+                sub     esp,00000008H
+                fstp    qword ptr [esp]
+                push    offset DGROUP:L50
+                push    edi
+                call    near ptr _BrFilePrintf
+                add     esp,00000010H
+L9:             mov     eax,dword ptr -8H[ebp]
+                mov     bx,word ptr __DefaultScriptMaterial+0cH
+                cmp     bx,word ptr +0cH[eax]
+                je      short L10
+                mov     edx,dword ptr -8H[ebp]
+                xor     eax,eax
+                mov     ax,word ptr +0aH[edx]
+                mov     dword ptr -4H[ebp],eax
+                fild    dword ptr -4H[ebp]
+                fmul    dword ptr L64
+                sub     esp,00000008H
+                fstp    qword ptr [esp]
+                push    offset DGROUP:L51
+                push    edi
+                call    near ptr _BrFilePrintf
+                add     esp,00000010H
+L10:            mov     eax,dword ptr -8H[ebp]
+                mov     cx,word ptr __DefaultScriptMaterial+0eH
+                cmp     cx,word ptr +0eH[eax]
+                je      short L11
+                mov     edx,dword ptr -8H[ebp]
+                xor     eax,eax
+                mov     ax,word ptr +0eH[edx]
+                mov     dword ptr -4H[ebp],eax
+                fild    dword ptr -4H[ebp]
+                fmul    dword ptr L64
+                sub     esp,00000008H
+                fstp    qword ptr [esp]
+                push    offset DGROUP:L52
+                push    edi
+                call    near ptr _BrFilePrintf
+                add     esp,00000010H
+L11:            mov     eax,dword ptr -8H[ebp]
+                mov     edx,dword ptr __DefaultScriptMaterial+10H
+                cmp     edx,dword ptr +10H[eax]
+                je      short L12
+                mov     eax,dword ptr -8H[ebp]
+                fild    dword ptr +10H[eax]
+                fmul    dword ptr L64
+                sub     esp,00000008H
+                fstp    qword ptr [esp]
+                push    offset DGROUP:L53
+                push    edi
+                call    near ptr _BrFilePrintf
+                add     esp,00000010H
+L12:            mov     eax,dword ptr -8H[ebp]
+                mov     dl,byte ptr __DefaultScriptMaterial+30H
+                cmp     dl,byte ptr +30H[eax]
+                je      short L13
+                mov     edx,dword ptr -8H[ebp]
+                xor     eax,eax
+                mov     al,byte ptr +30H[edx]
+                push    eax
+                push    offset DGROUP:L54
+                push    edi
+                call    near ptr _BrFilePrintf
+                add     esp,0000000cH
+L13:            mov     eax,dword ptr -8H[ebp]
+                mov     dh,byte ptr __DefaultScriptMaterial+31H
+                cmp     dh,byte ptr +31H[eax]
+                je      short L14
+                mov     edx,dword ptr -8H[ebp]
+                xor     eax,eax
+                mov     al,byte ptr +31H[edx]
+                push    eax
+                push    offset DGROUP:L55
+                push    edi
+                call    near ptr _BrFilePrintf
+                add     esp,0000000cH
+L14:            mov     ebx,dword ptr -8H[ebp]
+                xor     eax,eax
+L15:            lea     esi,+0H[eax*8]
+                mov     edx,dword ptr +18H[ebx]
+                cmp     edx,dword ptr __DefaultScriptMaterial+18H[esi]
+                jne     short L16
+                mov     edx,dword ptr +1cH[ebx]
+                cmp     edx,dword ptr __DefaultScriptMaterial+1cH[esi]
+                jne     short L16
+                inc     eax
+                add     ebx,00000008H
+                cmp     eax,00000003H
+                jl      short L15
+L16:            cmp     eax,00000003H
+                jge     short L20
+                push    offset DGROUP:L56
+                push    edi
+                mov     ebx,dword ptr -8H[ebp]
+                xor     esi,esi
+                call    near ptr _BrFilePrintf
+                add     esp,00000008H
+L17:            cmp     esi,00000002H
+                je      short L18
+                mov     eax,offset DGROUP:L57
+                jmp     short L19
+L18:            mov     eax,offset DGROUP:L45
+L19:            fild    dword ptr +1cH[ebx]
+                push    eax
+                fld     dword ptr L64
+                fxch    st(1)
+                fmul    st,st(1)
+                sub     esp,00000008H
+                fstp    qword ptr [esp]
+                fild    dword ptr +18H[ebx]
+                fmulp   st(1),st
+                sub     esp,00000008H
+                fstp    qword ptr [esp]
+                push    offset DGROUP:L58
+                push    edi
+                add     ebx,00000008H
+                inc     esi
+                call    near ptr _BrFilePrintf
+                add     esp,0000001cH
+                cmp     esi,00000003H
+                jl      short L17
+                push    offset DGROUP:L59
+                push    edi
+                call    near ptr _BrFilePrintf
+                add     esp,00000008H
+L20:            mov     eax,dword ptr -8H[ebp]
+                mov     esi,dword ptr +34H[eax]
+                test    esi,esi
+                je      short L21
+                mov     edx,dword ptr [esi]
+                mov     eax,esi
+                test    edx,edx
+                je      short L21
+                push    edx
+                push    offset DGROUP:L60
+                push    edi
+                call    near ptr _BrFilePrintf
+                add     esp,0000000cH
+L21:            mov     eax,dword ptr -8H[ebp]
+                mov     ecx,dword ptr +38H[eax]
+                test    ecx,ecx
+                je      short L22
+                mov     esi,dword ptr [ecx]
+                mov     eax,ecx
+                test    esi,esi
+                je      short L22
+                push    esi
+                push    offset DGROUP:L61
+                push    edi
+                call    near ptr _BrFilePrintf
+                add     esp,0000000cH
+L22:            mov     eax,dword ptr -8H[ebp]
+                mov     ebx,dword ptr +3cH[eax]
+                test    ebx,ebx
+                je      short L23
+                mov     ecx,dword ptr [ebx]
+                mov     eax,ebx
+                test    ecx,ecx
+                je      short L23
+                push    ecx
+                push    offset DGROUP:L62
+                push    edi
+                call    near ptr _BrFilePrintf
+                add     esp,0000000cH
+L23:            mov     eax,dword ptr -8H[ebp]
+                mov     edx,dword ptr +40H[eax]
+                test    edx,edx
+                je      short L24
+                mov     ebx,dword ptr [edx]
+                mov     eax,edx
+                test    ebx,ebx
+                je      short L24
+                push    ebx
+                push    offset DGROUP:L63
+                push    edi
+                call    near ptr _BrFilePrintf
+                add     esp,0000000cH
+L24:            push    offset DGROUP:L47
+                push    edi
+                call    near ptr _BrFilePrintf
+                add     esp,00000008H
+                mov     esp,ebp
+                pop     ebp
+                pop     edi
+                pop     esi
+                pop     ecx
+                pop     ebx
+                ret     
+_BrFmtScriptMaterialSaveMany:
+                push    ebx
+                push    esi
+                push    edi
+                mov     edi,dword ptr +18H[esp]
+                push    00000001H
+                mov     edx,dword ptr +14H[esp]
+                push    edx
+                call    near ptr _BrFileOpenWrite
+                mov     ebx,eax
+                add     esp,00000008H
+                mov     esi,eax
+                test    eax,eax
+                je      short L29
+                push    eax
+                push    offset DGROUP:L65
+                call    near ptr _BrFilePutLine
+                add     esp,00000008H
+                push    ebx
+                push    offset DGROUP:L66
+                call    near ptr _BrFilePutLine
+                add     esp,00000008H
+                mov     ecx,dword ptr +14H[esp]
+                test    ecx,ecx
+                je      short L27
+                xor     ebx,ebx
+                jmp     short L26
+L25:            mov     edx,esi
+                mov     eax,dword ptr [ecx]
+                call    near ptr WriteScriptMaterial_
+                add     ecx,00000004H
+                inc     ebx
+L26:            xor     eax,eax
+                mov     ax,di
+                cmp     ebx,eax
+                jl      short L25
+                jmp     short L28
+L27:            push    ebx
+                push    offset WriteScriptMaterial_
+                push    ecx
+                call    near ptr _BrMaterialEnum
+                add     esp,0000000cH
+                push    00000000H
+                call    near ptr _BrMaterialCount
+                add     esp,00000004H
+L28:            mov     ebx,eax
+                push    esi
+                call    near ptr _BrFileClose
+                add     esp,00000004H
+                mov     eax,ebx
+L29:            pop     edi
+                pop     esi
+                pop     ebx
+                ret     
+_BrFmtScriptMaterialSave:
+                push    00000001H
+                lea     eax,+0cH[esp]
+                push    eax
+                mov     edx,dword ptr +0cH[esp]
+                push    edx
+                call    near ptr _BrFmtScriptMaterialSaveMany
+                add     esp,0000000cH
+                ret     
+_TEXT           ENDS
+
+CONST           SEGMENT DWORD PUBLIC USE32 'DATA'
+L30             DB      6cH,69H,67H,68H,74H,00H,2fH,8bH
+L31             DB      70H,72H,65H,6cH,69H,74H,00H,41H
+L32             DB      73H,6dH,6fH,6fH,74H,68H,00H,04H
+L33             DB      65H,6eH,76H,69H,72H,6fH,6eH,6dH
+                DB      65H,6eH,74H,00H
+L34             DB      65H,6eH,76H,69H,72H,6fH,6eH,6dH
+                DB      65H,6eH,74H,5fH,6cH,6fH,63H,61H
+                DB      6cH,00H,83H,3dH
+L35             DB      70H,65H,72H,73H,70H,65H,63H,74H
+                DB      69H,76H,65H,00H
+L36             DB      64H,65H,63H,61H,6cH,00H,8bH,0ecH
+L37             DB      61H,6cH,77H,61H,79H,73H,5fH,76H
+                DB      69H,73H,69H,62H,6cH,65H,00H,83H
+L38             DB      74H,77H,6fH,5fH,73H,69H,64H,65H
+                DB      64H,00H,75H,02H
+L39             DB      66H,6fH,72H,63H,65H,5fH,7aH,5fH
+                DB      30H,00H,10H,83H
+L40             DB      64H,69H,74H,68H,65H,72H,00H,6dH
+L41             DB      0aH,6dH,61H,74H,65H,72H,69H,61H
+                DB      6cH,20H,3dH,20H,5bH,0aH,00H,00H
+L42             DB      20H,20H,20H,20H,69H,64H,65H,6eH
+                DB      74H,69H,66H,69H,65H,72H,20H,3dH
+                DB      20H,22H,25H,73H,22H,3bH,0aH,00H
+L43             DB      20H,20H,20H,20H,66H,6cH,61H,67H
+                DB      73H,20H,3dH,20H,5bH,00H,00H,00H
+L44             DB      2cH,20H,00H,68H
+L45             DB      00H,00H,2fH,8bH
+L46             DB      25H,73H,25H,73H,00H,74H,00H,41H
+L47             DB      5dH,3bH,0aH,00H
+L48             DB      20H,20H,20H,20H,63H,6fH,6cH,6fH
+                DB      75H,72H,20H,3dH,20H,5bH,25H,64H
+                DB      2cH,25H,64H,2cH,25H,64H,5dH,3bH
+                DB      0aH,00H,74H,5fH
+L49             DB      20H,20H,20H,20H,6fH,70H,61H,63H
+                DB      69H,74H,79H,20H,3dH,20H,25H,64H
+                DB      3bH,0aH,00H,00H
+L50             DB      20H,20H,20H,20H,61H,6dH,62H,69H
+                DB      65H,6eH,74H,20H,3dH,20H,25H,66H
+                DB      3bH,0aH,00H,62H
+L51             DB      20H,20H,20H,20H,64H,69H,66H,66H
+                DB      75H,73H,65H,20H,3dH,20H,25H,66H
+                DB      3bH,0aH,00H,63H
+L52             DB      20H,20H,20H,20H,73H,70H,65H,63H
+                DB      75H,6cH,61H,72H,20H,3dH,20H,25H
+                DB      66H,3bH,0aH,00H
+L53             DB      20H,20H,20H,20H,70H,6fH,77H,65H
+                DB      72H,20H,3dH,20H,25H,66H,3bH,0aH
+                DB      00H,64H,65H,6eH
+L54             DB      20H,20H,20H,20H,69H,6eH,64H,65H
+                DB      78H,5fH,62H,61H,73H,65H,20H,3dH
+                DB      20H,25H,64H,3bH,0aH,00H,00H,00H
+L55             DB      20H,20H,20H,20H,69H,6eH,64H,65H
+                DB      78H,5fH,72H,61H,6eH,67H,65H,20H
+                DB      3dH,20H,25H,64H,3bH,0aH,00H,20H
+L56             DB      20H,20H,20H,20H,6dH,61H,70H,5fH
+                DB      74H,72H,61H,6eH,73H,66H,6fH,72H
+                DB      6dH,20H,3dH,20H,5bH,0aH,00H,5fH
+L57             DB      2cH,00H,20H,20H
+L58             DB      20H,20H,20H,20H,20H,20H,20H,20H
+                DB      20H,20H,20H,20H,20H,20H,20H,20H
+                DB      20H,20H,20H,20H,20H,5bH,25H,66H
+                DB      2cH,25H,66H,5dH,25H,73H,0aH,00H
+L59             DB      20H,20H,20H,20H,20H,20H,20H,20H
+                DB      20H,20H,20H,20H,20H,20H,20H,20H
+                DB      20H,20H,20H,20H,5dH,3bH,0aH,00H
+L60             DB      20H,20H,20H,20H,63H,6fH,6cH,6fH
+                DB      75H,72H,5fH,6dH,61H,70H,20H,3dH
+                DB      20H,22H,25H,73H,22H,3bH,0aH,00H
+L61             DB      20H,20H,20H,20H,73H,63H,72H,65H
+                DB      65H,6eH,64H,6fH,6fH,72H,20H,3dH
+                DB      20H,22H,25H,73H,22H,3bH,0aH,00H
+L62             DB      20H,20H,20H,20H,69H,6eH,64H,65H
+                DB      78H,5fH,73H,68H,61H,64H,65H,20H
+                DB      3dH,20H,22H,25H,73H,22H,3bH,0aH
+                DB      00H,00H,00H,00H
+L63             DB      20H,20H,20H,20H,69H,6eH,64H,65H
+                DB      78H,5fH,62H,6cH,65H,6eH,64H,20H
+                DB      3dH,20H,22H,25H,73H,22H,3bH,0aH
+                DB      00H
+L64             DB      00H,00H,80H,37H,61H,70H,5fH
+L65             DB      23H,20H,42H,52H,65H,6eH,64H,65H
+                DB      72H,20H,4dH,61H,74H,65H,72H,69H
+                DB      61H,6cH,20H,53H,63H,72H,69H,70H
+                DB      74H,00H,20H,20H
+L66             DB      23H,00H
+CONST           ENDS
+
+CONST2          SEGMENT DWORD PUBLIC USE32 'DATA'
+CONST2          ENDS
+
+_DATA           SEGMENT DWORD PUBLIC USE32 'DATA'
+_MaterialFlagNames LABEL BYTE
+                DD      DGROUP:L30
+                DB      01H,00H,00H,00H
+                DD      DGROUP:L31
+                DB      02H,00H,00H,00H
+                DD      DGROUP:L32
+                DB      04H,00H,00H,00H
+                DD      DGROUP:L33
+                DB      08H,00H,00H,00H
+                DD      DGROUP:L34
+                DB      10H,00H,00H,00H
+                DD      DGROUP:L35
+                DB      20H,00H,00H,00H
+                DD      DGROUP:L36
+                DB      40H,00H,00H,00H
+                DD      DGROUP:L37
+                DB      00H,08H,00H,00H
+                DD      DGROUP:L38
+                DB      00H,10H,00H,00H
+                DD      DGROUP:L39
+                DB      00H,20H,00H,00H
+                DD      DGROUP:L40
+                DB      00H,40H,00H,00H
+_DATA           ENDS
+
+_BSS            SEGMENT DWORD PUBLIC USE32 'BSS'
+_BSS            ENDS
+
+                END

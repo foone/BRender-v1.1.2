@@ -1,0 +1,216 @@
+Material: "BIRD GRAD TEXP"
+  colour:     0   0   0
+  ka kd ks: 0.000000 0.000000 1.000000
+  index_base:      64
+  index_range:     31
+  texture:  "BBODY"
+  shade:    "shade"
+Material: "BIRD LEGS TEXP"
+  colour:     0   0   0
+  ka kd ks: 0.000000 0.000000 1.000000
+  index_base:      64
+  index_range:     31
+  texture:  "BBODY2"
+  shade:    "shade"
+Material: "YELLOW PLASTIC"
+  colour:   187 169   0
+  ka kd ks: 0.617647 0.617647 1.000000
+  index_base:       0
+  index_range:     63
+Material: "WHITE PLASTIC 2S"
+  colour:   166 166 166
+  ka kd ks: 0.650980 0.650980 1.000000
+  index_base:       0
+  index_range:     63
+Material: "RED PLASTIC"
+  colour:   166   0   0
+  ka kd ks: 0.195294 0.195294 1.000000
+  index_base:       0
+  index_range:     63
+Material: "BLACK PLASTIC"
+  colour:     0   0   0
+  ka kd ks: 0.000000 0.000000 1.000000
+  index_base:       0
+  index_range:     63
+Material: "WHITE PAINT 2S"
+  colour:   204 204 189
+  ka kd ks: 0.794118 0.794118 1.000000
+  index_base:       0
+  index_range:     63
+Material: "PURPLE VELVET"
+  colour:   148   0  83
+  ka kd ks: 0.258431 0.206667 0.468627
+  index_base:       0
+  index_range:     63
+Triangle mesh: "body"
+  114 vertices
+  114 texture vertices
+  1 smoothing groups (sensible remapping)
+  224 faces
+Triangle mesh: "neck1"
+  12 vertices
+  12 texture vertices
+  20 faces
+Triangle mesh: "neck02"
+  12 vertices
+  12 texture vertices
+  20 faces
+Triangle mesh: "neck03"
+  12 vertices
+  12 texture vertices
+  20 faces
+Triangle mesh: "neck04"
+  12 vertices
+  12 texture vertices
+  20 faces
+Triangle mesh: "neck05"
+  12 vertices
+  12 texture vertices
+  20 faces
+Triangle mesh: "neck06"
+  12 vertices
+  12 texture vertices
+  20 faces
+Triangle mesh: "neck07"
+  12 vertices
+  12 texture vertices
+  20 faces
+Triangle mesh: "neck08"
+  12 vertices
+  12 texture vertices
+  20 faces
+Triangle mesh: "neck09"
+  12 vertices
+  12 texture vertices
+  20 faces
+Triangle mesh: "neck10"
+  12 vertices
+  12 texture vertices
+  20 faces
+Triangle mesh: "neck11"
+  12 vertices
+  12 texture vertices
+  20 faces
+Triangle mesh: "neck12"
+  12 vertices
+  12 texture vertices
+  20 faces
+Triangle mesh: "head"
+  114 vertices
+  114 texture vertices
+  1 smoothing groups (sensible remapping)
+  224 faces
+Triangle mesh: "l-eye"
+  26 vertices
+  1 smoothing groups (sensible remapping)
+  48 faces
+Triangle mesh: "r-eye"
+  26 vertices
+  1 smoothing groups (sensible remapping)
+  48 faces
+Triangle mesh: "u-leg"
+  40 vertices
+  40 texture vertices
+  1 smoothing groups (sensible remapping)
+  72 faces
+Triangle mesh: "l-leg"
+  14 vertices
+  14 texture vertices
+  1 smoothing groups (sensible remapping)
+  24 faces
+Triangle mesh: "foot"
+  17 vertices
+  1 smoothing groups (sensible remapping)
+  30 faces
+Triangle mesh: "u-leg02"
+  40 vertices
+  40 texture vertices
+  1 smoothing groups (sensible remapping)
+  72 faces
+Triangle mesh: "l-leg02"
+  14 vertices
+  14 texture vertices
+  1 smoothing groups (sensible remapping)
+  24 faces
+Triangle mesh: "foot02"
+  17 vertices
+  1 smoothing groups (sensible remapping)
+  30 faces
+Triangle mesh: "tail"
+  80 vertices
+  139 faces
+Triangle mesh: "topknotc"
+  33 vertices
+  50 faces
+Triangle mesh: "l-pupil"
+  14 vertices
+  1 smoothing groups (sensible remapping)
+  24 faces
+Triangle mesh: "r-pupil"
+  14 vertices
+  1 smoothing groups (sensible remapping)
+  24 faces
+Triangle mesh: "column"
+  997 vertices
+  1 smoothing groups (sensible remapping)
+  1712 faces
+Camera: "rolli"
+  position: (830.097595  286.699768  929.769348)
+  target: (112.459045  40.935059  161.963837)
+Focal length:  41.5 mm Angle:  54.2 degrees
+Light: "underspot"
+  position: (532.046570  -2944.449951  1480.949829)
+  spotlight target: (67.630905  474.299866  23.022095)
+  cone angles: 15.750000 degrees -> 20.750000 degrees
+Light: "overspot"
+  position: (-638.056763  1286.916382  950.634460)
+  spotlight target: (-98.558777  -363.822357  176.971039)
+  cone angles: 17.500000 degrees -> 22.000000 degrees
+Light: "headspot"
+  position: (214.660400  22.752151  2199.551025)
+  spotlight target: (11.757533  114.847061  237.613678)
+  cone angles: 15.000000 degrees -> 18.250000 degrees
+Triangle mesh: "wall"
+  524 vertices
+  6 smoothing groups (sensible remapping)
+  524 faces
+Light: "Light01"
+  position: (-6404.742188  0.000000  3197.563965)
+Saved all 8 materials in "foo.mat".
+   0  BR_ACTOR_NONE
+   1  |   BR_ACTOR_NONE: "Dummy001"
+   1  |   BR_ACTOR_MODEL: "body"
+   2  |   |   BR_ACTOR_MODEL: "neck1"
+   3  |   |   |   BR_ACTOR_MODEL: "neck02"
+   4  |   |   |   |   BR_ACTOR_MODEL: "neck03"
+   5  |   |   |   |   |   BR_ACTOR_MODEL: "neck04"
+   6  |   |   |   |   |   |   BR_ACTOR_MODEL: "neck05"
+   7  |   |   |   |   |   |   |   BR_ACTOR_MODEL: "neck06"
+   8  |   |   |   |   |   |   |   |   BR_ACTOR_MODEL: "neck07"
+   9  |   |   |   |   |   |   |   |   |   BR_ACTOR_MODEL: "neck08"
+  10  ... BR_ACTOR_MODEL: "neck09"
+  11  ... |   BR_ACTOR_MODEL: "neck10"
+  12  ... |   |   BR_ACTOR_MODEL: "neck11"
+  13  ... |   |   |   BR_ACTOR_MODEL: "neck12"
+  14  ... |   |   |   |   BR_ACTOR_MODEL: "head"
+  15  ... |   |   |   |   |   BR_ACTOR_MODEL: "r-eye"
+  16  ... |   |   |   |   |   |   BR_ACTOR_MODEL: "r-pupil"
+  15  ... |   |   |   |   |   BR_ACTOR_MODEL: "l-eye"
+  16  ... |   |   |   |   |   |   BR_ACTOR_MODEL: "l-pupil"
+  15  ... |   |   |   |   |   BR_ACTOR_MODEL: "topknotc"
+   2  |   |   BR_ACTOR_MODEL: "u-leg"
+   3  |   |   |   BR_ACTOR_MODEL: "l-leg"
+   4  |   |   |   |   BR_ACTOR_MODEL: "foot"
+   2  |   |   BR_ACTOR_MODEL: "u-leg02"
+   3  |   |   |   BR_ACTOR_MODEL: "l-leg02"
+   4  |   |   |   |   BR_ACTOR_MODEL: "foot02"
+   2  |   |   BR_ACTOR_MODEL: "tail"
+   1  |   BR_ACTOR_MODEL: "column"
+   1  |   BR_ACTOR_MODEL: "wall"
+   1  |   BR_ACTOR_CAMERA: "rolli"
+   1  |   BR_ACTOR_LIGHT: "underspot"
+   1  |   BR_ACTOR_LIGHT: "overspot"
+   1  |   BR_ACTOR_LIGHT: "headspot"
+   1  |   BR_ACTOR_LIGHT: "Light01"
+Saved actor hierarchy in "foo.act".
+Saved all 28 models in "foo.dat".

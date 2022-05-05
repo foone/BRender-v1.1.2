@@ -1,0 +1,3 @@
+3ds_wfrs/3ds2br.obj : basetype.h parse3ds.h 3ds2br.c
+3ds_wfrs/bininstr.obj : basetype.h bininstr.h bininstr.c
+3ds_wfrs/parse3ds.obj : basetype.h bininstr.h parse3ds.h parse3ds.c

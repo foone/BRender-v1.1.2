@@ -1,0 +1,879 @@
+
+Module: D:\BRSRC\SOURCE\FW\custsupt.c
+Group: 'DGROUP' CONST,CONST2,_DATA,_BSS
+
+Segment: _TEXT  PARA USE32  000004f3 bytes  
+ 0000                    BrOriginToScreenXY_:
+ 0000  55                                push    ebp
+ 0001  89 e5                             mov     ebp,esp
+ 0003  83 ec 04                          sub     esp,00000004H
+ 0006  d9 05 f8 0f 00 00                 fld     dword ptr _fw+0ff8H
+ 000c  d8 0d 60 00 00 00                 fmul    dword ptr _fw+60H
+ 0012  d9 e8                             fld1    
+ 0014  d8 35 6c 00 00 00                 fdiv    dword ptr _fw+6cH
+ 001a  d9 05 fc 0f 00 00                 fld     dword ptr _fw+0ffcH
+ 0020  d8 0d 64 00 00 00                 fmul    dword ptr _fw+64H
+ 0026  d9 ca                             fxch    st(2)
+ 0028  d8 c9                             fmul    st,st(1)
+ 002a  d9 ca                             fxch    st(2)
+ 002c  de c9                             fmulp   st(1),st
+ 002e  d9 ee                             fldz    
+ 0030  d9 05 04 10 00 00                 fld     dword ptr _fw+1004H
+ 0036  d9 05 00 10 00 00                 fld     dword ptr _fw+1000H
+ 003c  de c4                             faddp   st(4),st
+ 003e  de c2                             faddp   st(2),st
+ 0040  d9 ca                             fxch    st(2)
+ 0042  d9 18                             fstp    dword ptr [eax]
+ 0044  d9 58 04                          fstp    dword ptr +4H[eax]
+ 0047  d8 1d 68 00 00 00                 fcomp   dword ptr _fw+68H
+ 004d  df e0                             fstsw   ax
+ 004f  9e                                sahf    
+ 0050  0f 92 c0                          setb    al
+ 0053  89 ec                             mov     esp,ebp
+ 0055  5d                                pop     ebp
+ 0056  c3                                ret     
+ 0057  90                                nop     
+ 0058                    BrOriginToScreenXYZO_:
+ 0058  53                                push    ebx
+ 0059  51                                push    ecx
+ 005a  52                                push    edx
+ 005b  56                                push    esi
+ 005c  55                                push    ebp
+ 005d  89 e5                             mov     ebp,esp
+ 005f  89 c6                             mov     esi,eax
+ 0061  d9 05 60 00 00 00                 fld     dword ptr _fw+60H
+ 0067  ba 00 00 ff 0f                    mov     edx,0fff0000H
+ 006c  d8 1d 6c 00 00 00                 fcomp   dword ptr _fw+6cH
+ 0072  df e0                             fstsw   ax
+ 0074  9e                                sahf    
+ 0075  76 05                             jbe     L1
+ 0077  ba 01 00 fe 0f                    mov     edx,0ffe0001H
+ 007c  d9 05 6c 00 00 00 L1              fld     dword ptr _fw+6cH
+ 0082  d9 e0                             fchs    
+ 0084  d8 1d 60 00 00 00                 fcomp   dword ptr _fw+60H
+ 008a  df e0                             fstsw   ax
+ 008c  9e                                sahf    
+ 008d  76 06                             jbe     L2
+ 008f  81 f2 02 00 02 00                 xor     edx,00020002H
+ 0095  d9 05 64 00 00 00 L2              fld     dword ptr _fw+64H
+ 009b  d8 1d 6c 00 00 00                 fcomp   dword ptr _fw+6cH
+ 00a1  df e0                             fstsw   ax
+ 00a3  9e                                sahf    
+ 00a4  76 06                             jbe     L3
+ 00a6  81 f2 04 00 04 00                 xor     edx,00040004H
+ 00ac  d9 05 6c 00 00 00 L3              fld     dword ptr _fw+6cH
+ 00b2  d9 e0                             fchs    
+ 00b4  d8 1d 64 00 00 00                 fcomp   dword ptr _fw+64H
+ 00ba  df e0                             fstsw   ax
+ 00bc  9e                                sahf    
+ 00bd  76 06                             jbe     L4
+ 00bf  81 f2 08 00 08 00                 xor     edx,00080008H
+ 00c5  d9 05 68 00 00 00 L4              fld     dword ptr _fw+68H
+ 00cb  d9 e0                             fchs    
+ 00cd  d8 1d 6c 00 00 00                 fcomp   dword ptr _fw+6cH
+ 00d3  df e0                             fstsw   ax
+ 00d5  9e                                sahf    
+ 00d6  76 06                             jbe     L5
+ 00d8  81 f2 20 00 20 00                 xor     edx,00200020H
+ 00de  d9 ee             L5              fldz    
+ 00e0  d8 1d 68 00 00 00                 fcomp   dword ptr _fw+68H
+ 00e6  df e0                             fstsw   ax
+ 00e8  9e                                sahf    
+ 00e9  73 06                             jae     L6
+ 00eb  81 f2 10 00 10 00                 xor     edx,00100010H
+ 00f1  31 db             L6              xor     ebx,ebx
+ 00f3  eb 50                             jmp     L9
+ 00f5  89 d8             L7              mov     eax,ebx
+ 00f7  c1 e0 04                          shl     eax,04H
+ 00fa  d9 05 64 00 00 00                 fld     dword ptr _fw+64H
+ 0100  d8 88 38 0f 00 00                 fmul    dword ptr _fw+0f38H[eax]
+ 0106  d9 05 60 00 00 00                 fld     dword ptr _fw+60H
+ 010c  d8 88 34 0f 00 00                 fmul    dword ptr _fw+0f34H[eax]
+ 0112  de c1                             faddp   st(1),st
+ 0114  d9 05 68 00 00 00                 fld     dword ptr _fw+68H
+ 011a  d8 88 3c 0f 00 00                 fmul    dword ptr _fw+0f3cH[eax]
+ 0120  de c1                             faddp   st(1),st
+ 0122  d9 05 6c 00 00 00                 fld     dword ptr _fw+6cH
+ 0128  d8 88 40 0f 00 00                 fmul    dword ptr _fw+0f40H[eax]
+ 012e  de c1                             faddp   st(1),st
+ 0130  d9 ee                             fldz    
+ 0132  de d9                             fcompp  st(1)
+ 0134  df e0                             fstsw   ax
+ 0136  9e                                sahf    
+ 0137  76 0b                             jbe     L8
+ 0139  b8 40 00 40 00                    mov     eax,00400040H
+ 013e  88 d9                             mov     cl,bl
+ 0140  d3 e0                             shl     eax,cl
+ 0142  31 c2                             xor     edx,eax
+ 0144  43                L8              inc     ebx
+ 0145  31 c0             L9              xor     eax,eax
+ 0147  66 a1 94 0f 00 00                 mov     ax,_fw+0f94H
+ 014d  39 c3                             cmp     ebx,eax
+ 014f  7c a4                             jl      L7
+ 0151  66 f7 c2 ff 0f                    test    dx,0fffH
+ 0156  75 4a                             jne     L10
+ 0158  d9 05 f8 0f 00 00                 fld     dword ptr _fw+0ff8H
+ 015e  d8 0d 60 00 00 00                 fmul    dword ptr _fw+60H
+ 0164  d8 35 6c 00 00 00                 fdiv    dword ptr _fw+6cH
+ 016a  d8 05 00 10 00 00                 fadd    dword ptr _fw+1000H
+ 0170  d9 1e                             fstp    dword ptr [esi]
+ 0172  d9 05 fc 0f 00 00                 fld     dword ptr _fw+0ffcH
+ 0178  d8 0d 64 00 00 00                 fmul    dword ptr _fw+64H
+ 017e  d8 35 6c 00 00 00                 fdiv    dword ptr _fw+6cH
+ 0184  d8 05 04 10 00 00                 fadd    dword ptr _fw+1004H
+ 018a  d9 5e 04                          fstp    dword ptr +4H[esi]
+ 018d  d9 05 68 00 00 00                 fld     dword ptr _fw+68H
+ 0193  dc 0d 00 00 00 00                 fmul    qword ptr L33
+ 0199  d8 35 6c 00 00 00                 fdiv    dword ptr _fw+6cH
+ 019f  d9 5e 08                          fstp    dword ptr +8H[esi]
+ 01a2  89 d0             L10             mov     eax,edx
+ 01a4  5d                                pop     ebp
+ 01a5  5e                                pop     esi
+ 01a6  5a                                pop     edx
+ 01a7  59                                pop     ecx
+ 01a8  5b                                pop     ebx
+ 01a9  c3                                ret     
+ 01aa  8b c0                             mov     eax,eax
+ 01ac                    BrPointToScreenXY_:
+ 01ac  53                                push    ebx
+ 01ad  51                                push    ecx
+ 01ae  55                                push    ebp
+ 01af  89 e5                             mov     ebp,esp
+ 01b1  83 ec 10                          sub     esp,00000010H
+ 01b4  89 c1                             mov     ecx,eax
+ 01b6  bb 30 00 00 00                    mov     ebx,offset _fw+30H
+ 01bb  8d 45 f0                          lea     eax,-10H[ebp]
+ 01be  e8 00 00 00 00                    call    BrMatrix4ApplyP_
+ 01c3  d9 05 f8 0f 00 00                 fld     dword ptr _fw+0ff8H
+ 01c9  d8 4d f0                          fmul    dword ptr -10H[ebp]
+ 01cc  d8 75 fc                          fdiv    dword ptr -4H[ebp]
+ 01cf  d8 05 00 10 00 00                 fadd    dword ptr _fw+1000H
+ 01d5  d9 19                             fstp    dword ptr [ecx]
+ 01d7  d9 05 fc 0f 00 00                 fld     dword ptr _fw+0ffcH
+ 01dd  d8 4d f4                          fmul    dword ptr -0cH[ebp]
+ 01e0  d8 75 fc                          fdiv    dword ptr -4H[ebp]
+ 01e3  d8 05 04 10 00 00                 fadd    dword ptr _fw+1004H
+ 01e9  d9 ee                             fldz    
+ 01eb  d9 c9                             fxch    st(1)
+ 01ed  d9 59 04                          fstp    dword ptr +4H[ecx]
+ 01f0  d8 5d f8                          fcomp   dword ptr -8H[ebp]
+ 01f3  df e0                             fstsw   ax
+ 01f5  9e                                sahf    
+ 01f6  0f 92 c0                          setb    al
+ 01f9  89 ec                             mov     esp,ebp
+ 01fb  5d                                pop     ebp
+ 01fc  59                                pop     ecx
+ 01fd  5b                                pop     ebx
+ 01fe  c3                                ret     
+ 01ff  90                                nop     
+ 0200                    BrPointToScreenXYZO_:
+ 0200  53                                push    ebx
+ 0201  51                                push    ecx
+ 0202  56                                push    esi
+ 0203  55                                push    ebp
+ 0204  89 e5                             mov     ebp,esp
+ 0206  83 ec 10                          sub     esp,00000010H
+ 0209  89 c6                             mov     esi,eax
+ 020b  bb 30 00 00 00                    mov     ebx,offset _fw+30H
+ 0210  8d 45 f0                          lea     eax,-10H[ebp]
+ 0213  e8 00 00 00 00                    call    BrMatrix4ApplyP_
+ 0218  d9 45 f0                          fld     dword ptr -10H[ebp]
+ 021b  ba 00 00 ff 0f                    mov     edx,0fff0000H
+ 0220  d8 5d fc                          fcomp   dword ptr -4H[ebp]
+ 0223  df e0                             fstsw   ax
+ 0225  9e                                sahf    
+ 0226  76 05                             jbe     L11
+ 0228  ba 01 00 fe 0f                    mov     edx,0ffe0001H
+ 022d  d9 45 fc          L11             fld     dword ptr -4H[ebp]
+ 0230  d9 e0                             fchs    
+ 0232  d8 5d f0                          fcomp   dword ptr -10H[ebp]
+ 0235  df e0                             fstsw   ax
+ 0237  9e                                sahf    
+ 0238  76 06                             jbe     L12
+ 023a  81 f2 02 00 02 00                 xor     edx,00020002H
+ 0240  d9 45 f4          L12             fld     dword ptr -0cH[ebp]
+ 0243  d8 5d fc                          fcomp   dword ptr -4H[ebp]
+ 0246  df e0                             fstsw   ax
+ 0248  9e                                sahf    
+ 0249  76 06                             jbe     L13
+ 024b  81 f2 04 00 04 00                 xor     edx,00040004H
+ 0251  d9 45 fc          L13             fld     dword ptr -4H[ebp]
+ 0254  d9 e0                             fchs    
+ 0256  d8 5d f4                          fcomp   dword ptr -0cH[ebp]
+ 0259  df e0                             fstsw   ax
+ 025b  9e                                sahf    
+ 025c  76 06                             jbe     L14
+ 025e  81 f2 08 00 08 00                 xor     edx,00080008H
+ 0264  d9 45 f8          L14             fld     dword ptr -8H[ebp]
+ 0267  d9 e0                             fchs    
+ 0269  d8 5d fc                          fcomp   dword ptr -4H[ebp]
+ 026c  df e0                             fstsw   ax
+ 026e  9e                                sahf    
+ 026f  76 06                             jbe     L15
+ 0271  81 f2 20 00 20 00                 xor     edx,00200020H
+ 0277  d9 ee             L15             fldz    
+ 0279  d8 5d f8                          fcomp   dword ptr -8H[ebp]
+ 027c  df e0                             fstsw   ax
+ 027e  9e                                sahf    
+ 027f  73 06                             jae     L16
+ 0281  81 f2 10 00 10 00                 xor     edx,00100010H
+ 0287  31 db             L16             xor     ebx,ebx
+ 0289  eb 44                             jmp     L19
+ 028b  89 d8             L17             mov     eax,ebx
+ 028d  c1 e0 04                          shl     eax,04H
+ 0290  d9 45 f4                          fld     dword ptr -0cH[ebp]
+ 0293  d8 88 38 0f 00 00                 fmul    dword ptr _fw+0f38H[eax]
+ 0299  d9 45 f0                          fld     dword ptr -10H[ebp]
+ 029c  d8 88 34 0f 00 00                 fmul    dword ptr _fw+0f34H[eax]
+ 02a2  de c1                             faddp   st(1),st
+ 02a4  d9 45 f8                          fld     dword ptr -8H[ebp]
+ 02a7  d8 88 3c 0f 00 00                 fmul    dword ptr _fw+0f3cH[eax]
+ 02ad  de c1                             faddp   st(1),st
+ 02af  d9 45 fc                          fld     dword ptr -4H[ebp]
+ 02b2  d8 88 40 0f 00 00                 fmul    dword ptr _fw+0f40H[eax]
+ 02b8  de c1                             faddp   st(1),st
+ 02ba  d9 ee                             fldz    
+ 02bc  de d9                             fcompp  st(1)
+ 02be  df e0                             fstsw   ax
+ 02c0  9e                                sahf    
+ 02c1  76 0b                             jbe     L18
+ 02c3  b8 40 00 40 00                    mov     eax,00400040H
+ 02c8  88 d9                             mov     cl,bl
+ 02ca  d3 e0                             shl     eax,cl
+ 02cc  31 c2                             xor     edx,eax
+ 02ce  43                L18             inc     ebx
+ 02cf  31 c0             L19             xor     eax,eax
+ 02d1  66 a1 94 0f 00 00                 mov     ax,_fw+0f94H
+ 02d7  39 c3                             cmp     ebx,eax
+ 02d9  7c b0                             jl      L17
+ 02db  66 f7 c2 ff 0f                    test    dx,0fffH
+ 02e0  75 38                             jne     L20
+ 02e2  d9 05 f8 0f 00 00                 fld     dword ptr _fw+0ff8H
+ 02e8  d8 4d f0                          fmul    dword ptr -10H[ebp]
+ 02eb  d8 75 fc                          fdiv    dword ptr -4H[ebp]
+ 02ee  d8 05 00 10 00 00                 fadd    dword ptr _fw+1000H
+ 02f4  d9 1e                             fstp    dword ptr [esi]
+ 02f6  d9 05 fc 0f 00 00                 fld     dword ptr _fw+0ffcH
+ 02fc  d8 4d f4                          fmul    dword ptr -0cH[ebp]
+ 02ff  d8 75 fc                          fdiv    dword ptr -4H[ebp]
+ 0302  d8 05 04 10 00 00                 fadd    dword ptr _fw+1004H
+ 0308  d9 5e 04                          fstp    dword ptr +4H[esi]
+ 030b  d9 45 f8                          fld     dword ptr -8H[ebp]
+ 030e  dc 0d 08 00 00 00                 fmul    qword ptr L34
+ 0314  d8 75 fc                          fdiv    dword ptr -4H[ebp]
+ 0317  d9 5e 08                          fstp    dword ptr +8H[esi]
+ 031a  89 d0             L20             mov     eax,edx
+ 031c  89 ec                             mov     esp,ebp
+ 031e  5d                                pop     ebp
+ 031f  5e                                pop     esi
+ 0320  59                                pop     ecx
+ 0321  5b                                pop     ebx
+ 0322  c3                                ret     
+ 0323  90                                nop     
+ 0324                    BrPointToScreenXYMany_:
+ 0324  51                                push    ecx
+ 0325  56                                push    esi
+ 0326  57                                push    edi
+ 0327  55                                push    ebp
+ 0328  89 e5                             mov     ebp,esp
+ 032a  83 ec 14                          sub     esp,00000014H
+ 032d  89 c1                             mov     ecx,eax
+ 032f  89 d6                             mov     esi,edx
+ 0331  89 5d fc                          mov     -4H[ebp],ebx
+ 0334  31 ff                             xor     edi,edi
+ 0336  3b 7d fc                          cmp     edi,-4H[ebp]
+ 0339  72 07                             jb      L21
+ 033b  89 ec                             mov     esp,ebp
+ 033d  5d                                pop     ebp
+ 033e  5f                                pop     edi
+ 033f  5e                                pop     esi
+ 0340  59                                pop     ecx
+ 0341  c3                                ret     
+ 0342  bb 30 00 00 00    L21             mov     ebx,offset _fw+30H
+ 0347  8d 45 ec                          lea     eax,-14H[ebp]
+ 034a  89 f2                             mov     edx,esi
+ 034c  e8 00 00 00 00                    call    BrMatrix4ApplyP_
+ 0351  d9 05 f8 0f 00 00                 fld     dword ptr _fw+0ff8H
+ 0357  d8 4d ec                          fmul    dword ptr -14H[ebp]
+ 035a  d8 75 f8                          fdiv    dword ptr -8H[ebp]
+ 035d  d8 05 00 10 00 00                 fadd    dword ptr _fw+1000H
+ 0363  d9 19                             fstp    dword ptr [ecx]
+ 0365  d9 05 fc 0f 00 00                 fld     dword ptr _fw+0ffcH
+ 036b  d8 4d f0                          fmul    dword ptr -10H[ebp]
+ 036e  d8 75 f8                          fdiv    dword ptr -8H[ebp]
+ 0371  47                                inc     edi
+ 0372  83 c1 08                          add     ecx,00000008H
+ 0375  d8 05 04 10 00 00                 fadd    dword ptr _fw+1004H
+ 037b  83 c6 0c                          add     esi,0000000cH
+ 037e  d9 59 fc                          fstp    dword ptr -4H[ecx]
+ 0381  3b 7d fc                          cmp     edi,-4H[ebp]
+ 0384  72 bc                             jb      L21
+ 0386  89 ec                             mov     esp,ebp
+ 0388  5d                                pop     ebp
+ 0389  5f                                pop     edi
+ 038a  5e                                pop     esi
+ 038b  59                                pop     ecx
+ 038c  c3                                ret     
+ 038d  8d 40 00                          lea     eax,+0H[eax]
+ 0390                    BrPointToScreenXYZOMany_:
+ 0390  56                                push    esi
+ 0391  57                                push    edi
+ 0392  55                                push    ebp
+ 0393  89 e5                             mov     ebp,esp
+ 0395  83 ec 1c                          sub     esp,0000001cH
+ 0398  89 c6                             mov     esi,eax
+ 039a  89 55 f8                          mov     -8H[ebp],edx
+ 039d  89 df                             mov     edi,ebx
+ 039f  89 4d f4                          mov     -0cH[ebp],ecx
+ 03a2  31 d2                             xor     edx,edx
+ 03a4  89 55 fc                          mov     -4H[ebp],edx
+ 03a7  8b 45 fc                          mov     eax,-4H[ebp]
+ 03aa  3b 45 f4                          cmp     eax,-0cH[ebp]
+ 03ad  72 06                             jb      L22
+ 03af  89 ec                             mov     esp,ebp
+ 03b1  5d                                pop     ebp
+ 03b2  5f                                pop     edi
+ 03b3  5e                                pop     esi
+ 03b4  c3                                ret     
+ 03b5  bb 30 00 00 00    L22             mov     ebx,offset _fw+30H
+ 03ba  8d 45 e4                          lea     eax,-1cH[ebp]
+ 03bd  89 fa                             mov     edx,edi
+ 03bf  e8 00 00 00 00                    call    BrMatrix4ApplyP_
+ 03c4  d9 45 e4                          fld     dword ptr -1cH[ebp]
+ 03c7  ba 00 00 ff 0f                    mov     edx,0fff0000H
+ 03cc  d8 5d f0                          fcomp   dword ptr -10H[ebp]
+ 03cf  df e0                             fstsw   ax
+ 03d1  9e                                sahf    
+ 03d2  76 05                             jbe     L23
+ 03d4  ba 01 00 fe 0f                    mov     edx,0ffe0001H
+ 03d9  d9 45 f0          L23             fld     dword ptr -10H[ebp]
+ 03dc  d9 e0                             fchs    
+ 03de  d8 5d e4                          fcomp   dword ptr -1cH[ebp]
+ 03e1  df e0                             fstsw   ax
+ 03e3  9e                                sahf    
+ 03e4  76 06                             jbe     L24
+ 03e6  81 f2 02 00 02 00                 xor     edx,00020002H
+ 03ec  d9 45 e8          L24             fld     dword ptr -18H[ebp]
+ 03ef  d8 5d f0                          fcomp   dword ptr -10H[ebp]
+ 03f2  df e0                             fstsw   ax
+ 03f4  9e                                sahf    
+ 03f5  76 06                             jbe     L25
+ 03f7  81 f2 04 00 04 00                 xor     edx,00040004H
+ 03fd  d9 45 f0          L25             fld     dword ptr -10H[ebp]
+ 0400  d9 e0                             fchs    
+ 0402  d8 5d e8                          fcomp   dword ptr -18H[ebp]
+ 0405  df e0                             fstsw   ax
+ 0407  9e                                sahf    
+ 0408  76 06                             jbe     L26
+ 040a  81 f2 08 00 08 00                 xor     edx,00080008H
+ 0410  d9 45 ec          L26             fld     dword ptr -14H[ebp]
+ 0413  d9 e0                             fchs    
+ 0415  d8 5d f0                          fcomp   dword ptr -10H[ebp]
+ 0418  df e0                             fstsw   ax
+ 041a  9e                                sahf    
+ 041b  76 06                             jbe     L27
+ 041d  81 f2 20 00 20 00                 xor     edx,00200020H
+ 0423  d9 ee             L27             fldz    
+ 0425  d8 5d ec                          fcomp   dword ptr -14H[ebp]
+ 0428  df e0                             fstsw   ax
+ 042a  9e                                sahf    
+ 042b  73 06                             jae     L28
+ 042d  81 f2 10 00 10 00                 xor     edx,00100010H
+ 0433  31 db             L28             xor     ebx,ebx
+ 0435  eb 44                             jmp     L31
+ 0437  89 d8             L29             mov     eax,ebx
+ 0439  c1 e0 04                          shl     eax,04H
+ 043c  d9 45 e8                          fld     dword ptr -18H[ebp]
+ 043f  d8 88 38 0f 00 00                 fmul    dword ptr _fw+0f38H[eax]
+ 0445  d9 45 e4                          fld     dword ptr -1cH[ebp]
+ 0448  d8 88 34 0f 00 00                 fmul    dword ptr _fw+0f34H[eax]
+ 044e  de c1                             faddp   st(1),st
+ 0450  d9 45 ec                          fld     dword ptr -14H[ebp]
+ 0453  d8 88 3c 0f 00 00                 fmul    dword ptr _fw+0f3cH[eax]
+ 0459  de c1                             faddp   st(1),st
+ 045b  d9 45 f0                          fld     dword ptr -10H[ebp]
+ 045e  d8 88 40 0f 00 00                 fmul    dword ptr _fw+0f40H[eax]
+ 0464  de c1                             faddp   st(1),st
+ 0466  d9 ee                             fldz    
+ 0468  de d9                             fcompp  st(1)
+ 046a  df e0                             fstsw   ax
+ 046c  9e                                sahf    
+ 046d  76 0b                             jbe     L30
+ 046f  b8 40 00 40 00                    mov     eax,00400040H
+ 0474  88 d9                             mov     cl,bl
+ 0476  d3 e0                             shl     eax,cl
+ 0478  31 c2                             xor     edx,eax
+ 047a  43                L30             inc     ebx
+ 047b  31 c0             L31             xor     eax,eax
+ 047d  66 a1 94 0f 00 00                 mov     ax,_fw+0f94H
+ 0483  39 c3                             cmp     ebx,eax
+ 0485  7c b0                             jl      L29
+ 0487  8b 45 f8                          mov     eax,-8H[ebp]
+ 048a  89 10                             mov     [eax],edx
+ 048c  66 f7 c2 ff 0f                    test    dx,0fffH
+ 0491  75 38                             jne     L32
+ 0493  d9 05 f8 0f 00 00                 fld     dword ptr _fw+0ff8H
+ 0499  d8 4d e4                          fmul    dword ptr -1cH[ebp]
+ 049c  d8 75 f0                          fdiv    dword ptr -10H[ebp]
+ 049f  d8 05 00 10 00 00                 fadd    dword ptr _fw+1000H
+ 04a5  d9 1e                             fstp    dword ptr [esi]
+ 04a7  d9 05 fc 0f 00 00                 fld     dword ptr _fw+0ffcH
+ 04ad  d8 4d e8                          fmul    dword ptr -18H[ebp]
+ 04b0  d8 75 f0                          fdiv    dword ptr -10H[ebp]
+ 04b3  d8 05 04 10 00 00                 fadd    dword ptr _fw+1004H
+ 04b9  d9 5e 04                          fstp    dword ptr +4H[esi]
+ 04bc  d9 45 ec                          fld     dword ptr -14H[ebp]
+ 04bf  dc 0d 10 00 00 00                 fmul    qword ptr L35
+ 04c5  d8 75 f0                          fdiv    dword ptr -10H[ebp]
+ 04c8  d9 5e 08                          fstp    dword ptr +8H[esi]
+ 04cb  8b 4d f8          L32             mov     ecx,-8H[ebp]
+ 04ce  8b 5d fc                          mov     ebx,-4H[ebp]
+ 04d1  83 c6 0c                          add     esi,0000000cH
+ 04d4  83 c7 0c                          add     edi,0000000cH
+ 04d7  83 c1 04                          add     ecx,00000004H
+ 04da  43                                inc     ebx
+ 04db  89 4d f8                          mov     -8H[ebp],ecx
+ 04de  89 5d fc                          mov     -4H[ebp],ebx
+ 04e1  8b 45 fc                          mov     eax,-4H[ebp]
+ 04e4  3b 45 f4                          cmp     eax,-0cH[ebp]
+ 04e7  0f 82 c8 fe ff ff                 jb      L22
+ 04ed  89 ec                             mov     esp,ebp
+ 04ef  5d                                pop     ebp
+ 04f0  5f                                pop     edi
+ 04f1  5e                                pop     esi
+ 04f2  c3                                ret     
+
+No disassembly errors
+
+------------------------------------------------------------
+
+Segment: CONST  DWORD USE32  00000018 bytes  
+ 0000  00 00 00 00 c0 ff df c0 L33             - ........
+ 0008  00 00 00 00 c0 ff df c0 L34             - ........
+ 0010  00 00 00 00 c0 ff df c0 L35             - ........
+
+No disassembly errors
+
+------------------------------------------------------------
+
+Segment: _DATA  DWORD USE32  00000032 bytes  
+ 0000  24 49 64 3a 20 63 75 73 _rscid          - $Id: cus
+ 0008  74 73 75 70 74 2e 63 20                 - tsupt.c 
+ 0010  31 2e 32 20 31 39 39 35                 - 1.2 1995
+ 0018  2f 30 32 2f 32 32 20 32                 - /02/22 2
+ 0020  31 3a 34 31 3a 32 37 20                 - 1:41:27 
+ 0028  73 61 6d 20 45 78 70 20                 - sam Exp 
+ 0030  24 00                                   - $.
+
+No disassembly errors
+
+------------------------------------------------------------
+
+Segment: $$SYMBOLS  BYTE USE16  0000014a bytes  
+ 0000  0e 12                                   - ..
+ 0002  00 00 00 00 00 00                       DP      _rscid
+ 0008  5b 72 73 63 69 64 08 32                 - [rscid.2
+ 0010  00 00 00 00 00 00                       DP      BrOriginToScreenXY_
+ 0016  29 24 00 00 00 00 57 00                 - )$....W.
+ 001e  00 00 00 00 06 04 04 00                 - ........
+ 0026  00 00 61 40 01 30 1c 42                 - ..a@.0.B
+ 002e  72 4f 72 69 67 69 6e 54                 - rOriginT
+ 0036  6f 53 63 72 65 65 6e 58                 - oScreenX
+ 003e  59 0c 23 6c 00 00 00 e5                 - Y.#l....
+ 0046  00 00 00 4b 00 2c 24 58                 - ...K.,$X
+ 004e  00 00 00 52 01 00 00 00                 - ...R....
+ 0056  00 07 06 14 00 00 00 67                 - .......g
+ 005e  30 1c 01 30 1c 42 72 4f                 - 0..0.BrO
+ 0066  72 69 67 69 6e 54 6f 53                 - riginToS
+ 006e  63 72 65 65 6e 58 59 5a                 - creenXYZ
+ 0076  4f 2a 24 ac 01 00 00 53                 - O*$....S
+ 007e  00 00 00 00 00 08 06 0c                 - ........
+ 0086  00 00 00 68 40 02 30 1c                 - ...h@.0.
+ 008e  30 1f 42 72 50 6f 69 6e                 - 0.BrPoin
+ 0096  74 54 6f 53 63 72 65 65                 - tToScree
+ 009e  6e 58 59 0c 23 20 02 00                 - nXY.# ..
+ 00a6  00 bb 00 00 00 ad 00 2d                 - .......-
+ 00ae  24 00 02 00 00 23 01 00                 - $....#..
+ 00b6  00 00 00 09 07 10 00 00                 - ........
+ 00be  00 69 30 1c 02 30 1c 30                 - .i0..0.0
+ 00c6  1f 42 72 50 6f 69 6e 74                 - .BrPoint
+ 00ce  54 6f 53 63 72 65 65 6e                 - ToScreen
+ 00d6  58 59 5a 4f 30 24 24 03                 - XYZO0$$.
+ 00de  00 00 69 00 00 00 00 00                 - ..i.....
+ 00e6  09 07 10 00 00 00 6a 00                 - ......j.
+ 00ee  03 30 1c 30 1f 30 1d 42                 - .0.0.0.B
+ 00f6  72 50 6f 69 6e 74 54 6f                 - rPointTo
+ 00fe  53 63 72 65 65 6e 58 59                 - ScreenXY
+ 0106  4d 61 6e 79 0c 23 cc 03                 - Many.#..
+ 010e  00 00 c0 00 00 00 16 01                 - ........
+ 0116  34 24 90 03 00 00 63 01                 - 4$....c.
+ 011e  00 00 00 00 08 06 0c 00                 - ........
+ 0126  00 00 6c 00 04 30 1c 30                 - ..l..0.0
+ 012e  1f 30 1d 30 1e 42 72 50                 - .0.0.BrP
+ 0136  6f 69 6e 74 54 6f 53 63                 - ointToSc
+ 013e  72 65 65 6e 58 59 5a 4f                 - reenXYZO
+ 0146  4d 61 6e 79                             - Many
+
+No disassembly errors
+
+------------------------------------------------------------
+
+Segment: $$TYPES  BYTE USE16  00000515 bytes  
+ 0000  06 13 15 05 00 00 08 11                 - ........
+ 0008  73 74 72 75 63 74 07 11                 - struct..
+ 0010  75 6e 69 6f 6e 06 11 65                 - union..e
+ 0018  6e 75 6d 07 10 10 63 68                 - num...ch
+ 0020  61 72 0e 10 00 73 69 67                 - ar...sig
+ 0028  6e 65 64 20 63 68 61 72                 - ned char
+ 0030  10 10 10 75 6e 73 69 67                 - ...unsig
+ 0038  6e 65 64 20 63 68 61 72                 - ned char
+ 0040  08 10 01 73 68 6f 72 74                 - ...short
+ 0048  11 10 11 75 6e 73 69 67                 - ...unsig
+ 0050  6e 65 64 20 73 68 6f 72                 - ned shor
+ 0058  74 06 10 03 69 6e 74 0f                 - t...int.
+ 0060  10 13 75 6e 73 69 67 6e                 - ..unsign
+ 0068  65 64 20 69 6e 74 0b 12                 - ed int..
+ 0070  00 08 77 63 68 61 72 5f                 - ..wchar_
+ 0078  74 0a 12 00 0a 73 69 7a                 - t....siz
+ 0080  65 5f 74 07 10 03 6c 6f                 - e_t...lo
+ 0088  6e 67 0d 12 00 0d 62 72                 - ng....br
+ 0090  5f 69 6e 74 5f 33 32 10                 - _int_32.
+ 0098  10 13 75 6e 73 69 67 6e                 - ..unsign
+ 00a0  65 64 20 6c 6f 6e 67 0e                 - ed long.
+ 00a8  12 00 0f 62 72 5f 75 69                 - ...br_ui
+ 00b0  6e 74 5f 33 32 0d 12 00                 - nt_32...
+ 00b8  07 62 72 5f 69 6e 74 5f                 - .br_int_
+ 00c0  31 36 0e 12 00 08 62 72                 - 16....br
+ 00c8  5f 75 69 6e 74 5f 31 36                 - _uint_16
+ 00d0  0c 12 00 05 62 72 5f 69                 - ....br_i
+ 00d8  6e 74 5f 38 0d 12 00 06                 - nt_8....
+ 00e0  62 72 5f 75 69 6e 74 5f                 - br_uint_
+ 00e8  38 0d 12 00 0a 62 72 5f                 - 8....br_
+ 00f0  73 69 7a 65 5f 74 0e 12                 - size_t..
+ 00f8  00 09 62 72 5f 62 6f 6f                 - ..br_boo
+ 0100  6c 65 61 6e 0f 12 00 0d                 - lean....
+ 0108  62 72 5f 66 69 78 65 64                 - br_fixed
+ 0110  5f 6c 73 10 12 00 07 62                 - _ls....b
+ 0118  72 5f 66 69 78 65 64 5f                 - r_fixed_
+ 0120  6c 73 66 0f 12 00 0f 62                 - lsf....b
+ 0128  72 5f 66 69 78 65 64 5f                 - r_fixed_
+ 0130  6c 75 10 12 00 08 62 72                 - lu....br
+ 0138  5f 66 69 78 65 64 5f 6c                 - _fixed_l
+ 0140  75 66 0f 12 00 07 62 72                 - uf....br
+ 0148  5f 66 69 78 65 64 5f 73                 - _fixed_s
+ 0150  73 10 12 00 04 62 72 5f                 - s....br_
+ 0158  66 69 78 65 64 5f 73 73                 - fixed_ss
+ 0160  66 0f 12 00 08 62 72 5f                 - f....br_
+ 0168  66 69 78 65 64 5f 73 75                 - fixed_su
+ 0170  10 12 00 06 62 72 5f 66                 - ....br_f
+ 0178  69 78 65 64 5f 73 75 66                 - ixed_suf
+ 0180  08 10 23 66 6c 6f 61 74                 - ..#float
+ 0188  0d 12 00 1f 62 72 5f 73                 - ....br_s
+ 0190  63 61 6c 61 72 0f 12 00                 - calar...
+ 0198  1f 62 72 5f 66 72 61 63                 - .br_frac
+ 01a0  74 69 6f 6e 10 12 00 1f                 - tion....
+ 01a8  62 72 5f 75 66 72 61 63                 - br_ufrac
+ 01b0  74 69 6f 6e 0d 12 00 0f                 - tion....
+ 01b8  62 72 5f 63 6f 6c 6f 75                 - br_colou
+ 01c0  72 0c 12 00 1a 62 72 5f                 - r....br_
+ 01c8  61 6e 67 6c 65 03 46 14                 - angle.F.
+ 01d0  06 72 09 02 25 15 15 12                 - .r..%...
+ 01d8  00 26 62 72 5f 6d 6f 64                 - .&br_mod
+ 01e0  65 5f 74 65 73 74 5f 63                 - e_test_c
+ 01e8  62 66 6e 07 10 30 76 6f                 - bfn..0vo
+ 01f0  69 64 05 72 10 01 28 1a                 - id.r..(.
+ 01f8  12 00 29 62 72 66 69 6c                 - ..)brfil
+ 0200  65 5f 61 74 74 72 69 62                 - e_attrib
+ 0208  75 74 65 73 5f 63 62 66                 - utes_cbf
+ 0210  6e 03 46 28 03 46 04 03                 - n.F(.F..
+ 0218  46 27 03 46 09 08 72 2b                 - F'.F..r+
+ 0220  04 2c 15 2d 2e 19 12 00                 - .,.-....
+ 0228  2f 62 72 66 69 6c 65 5f                 - /brfile_
+ 0230  6f 70 65 6e 5f 72 65 61                 - open_rea
+ 0238  64 5f 63 62 66 6e 06 72                 - d_cbfn.r
+ 0240  2b 02 2c 09 1a 12 00 31                 - +.,....1
+ 0248  62 72 66 69 6c 65 5f 6f                 - brfile_o
+ 0250  70 65 6e 5f 77 72 69 74                 - pen_writ
+ 0258  65 5f 63 62 66 6e 05 72                 - e_cbfn.r
+ 0260  28 01 2b 15 12 00 33 62                 - (.+...3b
+ 0268  72 66 69 6c 65 5f 63 6c                 - rfile_cl
+ 0270  6f 73 65 5f 63 62 66 6e                 - ose_cbfn
+ 0278  05 72 09 01 2b 13 12 00                 - .r..+...
+ 0280  35 62 72 66 69 6c 65 5f                 - 5brfile_
+ 0288  65 6f 66 5f 63 62 66 6e                 - eof_cbfn
+ 0290  16 12 00 35 62 72 66 69                 - ...5brfi
+ 0298  6c 65 5f 67 65 74 63 68                 - le_getch
+ 02a0  72 5f 63 62 66 6e 06 72                 - r_cbfn.r
+ 02a8  28 02 09 2b 16 12 00 38                 - (..+...8
+ 02b0  62 72 66 69 6c 65 5f 70                 - brfile_p
+ 02b8  75 74 63 68 72 5f 63 62                 - utchr_cb
+ 02c0  66 6e 08 72 15 04 2b 15                 - fn.r..+.
+ 02c8  0a 2b 14 12 00 3a 62 72                 - .+...:br
+ 02d0  66 69 6c 65 5f 72 65 61                 - file_rea
+ 02d8  64 5f 63 62 66 6e 15 12                 - d_cbfn..
+ 02e0  00 3a 62 72 66 69 6c 65                 - .:brfile
+ 02e8  5f 77 72 69 74 65 5f 63                 - _write_c
+ 02f0  62 66 6e 07 72 15 03 2c                 - bfn.r..,
+ 02f8  15 2b 17 12 00 3d 62 72                 - .+...=br
+ 0300  66 69 6c 65 5f 67 65 74                 - file_get
+ 0308  6c 69 6e 65 5f 63 62 66                 - line_cbf
+ 0310  6e 06 72 28 02 2c 2b 17                 - n.r(.,+.
+ 0318  12 00 3f 62 72 66 69 6c                 - ..?brfil
+ 0320  65 5f 70 75 74 6c 69 6e                 - e_putlin
+ 0328  65 5f 63 62 66 6e 06 72                 - e_cbfn.r
+ 0330  28 02 15 2b 17 12 00 41                 - (..+...A
+ 0338  62 72 66 69 6c 65 5f 61                 - brfile_a
+ 0340  64 76 61 6e 63 65 5f 63                 - dvance_c
+ 0348  62 66 6e 05 72 28 01 2c                 - bfn.r(.,
+ 0350  18 12 00 43 62 72 5f 64                 - ...Cbr_d
+ 0358  69 61 67 5f 77 61 72 6e                 - iag_warn
+ 0360  69 6e 67 5f 63 62 66 6e                 - ing_cbfn
+ 0368  18 12 00 43 62 72 5f 64                 - ...Cbr_d
+ 0370  69 61 67 5f 66 61 69 6c                 - iag_fail
+ 0378  75 72 65 5f 63 62 66 6e                 - ure_cbfn
+ 0380  06 72 2b 02 15 14 17 12                 - .r+.....
+ 0388  00 46 62 72 6d 65 6d 5f                 - .Fbrmem_
+ 0390  61 6c 6c 6f 63 61 74 65                 - allocate
+ 0398  5f 63 62 66 6e 13 12 00                 - _cbfn...
+ 03a0  33 62 72 6d 65 6d 5f 66                 - 3brmem_f
+ 03a8  72 65 65 5f 63 62 66 6e                 - ree_cbfn
+ 03b0  05 72 15 01 14 16 12 00                 - .r......
+ 03b8  49 62 72 6d 65 6d 5f 69                 - Ibrmem_i
+ 03c0  6e 71 75 69 72 65 5f 63                 - nquire_c
+ 03c8  62 66 6e 07 72 28 03 2b                 - bfn.r(.+
+ 03d0  14 15 18 12 00 4b 62 72                 - .....Kbr
+ 03d8  5f 72 65 73 6f 75 72 63                 - _resourc
+ 03e0  65 66 72 65 65 5f 63 62                 - efree_cb
+ 03e8  66 6e 0c 12 00 10 62 72                 - fn....br
+ 03f0  5f 65 72 72 6f 72 0c 12                 - _error..
+ 03f8  00 1f 62 72 5f 66 6c 6f                 - ..br_flo
+ 0400  61 74 07 10 30 76 6f 69                 - at..0voi
+ 0408  64 03 46 4f 06 72 09 02                 - d.FO.r..
+ 0410  50 50 11 12 00 51 62 72                 - PP...Qbr
+ 0418  5f 71 73 6f 72 74 5f 63                 - _qsort_c
+ 0420  62 66 6e 06 72 10 02 2b                 - bfn.r..+
+ 0428  2b 13 12 00 53 62 72 5f                 - +...Sbr_
+ 0430  72 65 73 65 6e 75 6d 5f                 - resenum_
+ 0438  63 62 66 6e 04 20 0c 0a                 - cbfn. ..
+ 0440  0b 12 00 55 6a 6d 70 5f                 - ...Ujmp_
+ 0448  62 75 66 10 12 00 4d 62                 - buf...Mb
+ 0450  72 5f 65 78 63 65 70 74                 - r_except
+ 0458  69 6f 6e 05 72 2b 01 2c                 - ion.r+.,
+ 0460  17 12 00 58 62 72 5f 66                 - ...Xbr_f
+ 0468  69 6e 64 5f 66 61 69 6c                 - ind_fail
+ 0470  65 64 5f 63 62 66 6e 10                 - ed_cbfn.
+ 0478  12 00 53 62 72 5f 65 6e                 - ..Sbr_en
+ 0480  75 6d 5f 63 62 66 6e 04                 - um_cbfn.
+ 0488  20 31 04 04 20 01 20 08                 -  1.. . .
+ 0490  60 01 00 08 00 00 00 05                 - `.......
+ 0498  61 00 5c 76 0e 12 01 5d                 - a.\v...]
+ 04a0  62 72 5f 76 65 63 74 6f                 - br_vecto
+ 04a8  72 32 0e 12 00 5e 62 72                 - r2...^br
+ 04b0  5f 76 65 63 74 6f 72 32                 - _vector2
+ 04b8  03 46 5f 05 72 14 01 60                 - .F_.r..`
+ 04c0  04 20 02 20 08 60 01 00                 - . . .`..
+ 04c8  0c 00 00 00 05 61 00 62                 - .....a.b
+ 04d0  76 0e 12 01 63 62 72 5f                 - v...cbr_
+ 04d8  76 65 63 74 6f 72 33 0e                 - vector3.
+ 04e0  12 00 64 62 72 5f 76 65                 - ..dbr_ve
+ 04e8  63 74 6f 72 33 03 46 65                 - ctor3.Fe
+ 04f0  05 72 10 01 66 06 72 14                 - .r..f.r.
+ 04f8  02 60 66 06 72 10 02 66                 - .`f.r..f
+ 0500  66 07 72 28 03 60 66 10                 - f.r(.`f.
+ 0508  03 46 10 08 72 28 04 66                 - .F..r(.f
+ 0510  6b 66 10 02 14                          - kf...
+
+No disassembly errors
+
+------------------------------------------------------------
+
+Segment: $$TYPES  BYTE USE16  000005c5 bytes  
+ 0000  00 00 30 00 00 00 1e 00                 - ..0.....
+ 0008  2f 00 47 00 65 00 84 00                 - /.G.e...
+ 0010  a3 00 bf 00 dc 00 f9 00                 - ........
+ 0018  16 01 33 01 50 01 6b 01                 - ..3.P.k.
+ 0020  8a 01 a6 01 c5 01 e2 01                 - ........
+ 0028  01 02 1d 02 39 02 56 02                 - ....9.V.
+ 0030  72 02 8d 02 ac 02 c9 02                 - r.......
+ 0038  e6 02 02 03 1e 03 38 03                 - ......8.
+ 0040  57 03 75 03 93 03 b1 03                 - W.u.....
+ 0048  cf 03 ee 03 0b 04 29 04                 - ......).
+ 0050  46 04 64 04 75 04 92 04                 - F.d.u...
+ 0058  b0 04 cc 04 ea 04 08 05                 - ........
+ 0060  25 05 43 05 44 3a 5c 42                 - %.C.D:\B
+ 0068  52 53 52 43 5c 53 4f 55                 - RSRC\SOU
+ 0070  52 43 45 5c 46 57 5c 63                 - RCE\FW\c
+ 0078  75 73 74 73 75 70 74 2e                 - ustsupt.
+ 0080  63 00 43 3a 5c 57 43 5c                 - c.C:\WC\
+ 0088  48 5c 73 74 72 69 6e 67                 - H\string
+ 0090  2e 68 00 44 3a 5c 42 52                 - .h.D:\BR
+ 0098  53 52 43 5c 53 4f 55 52                 - SRC\SOUR
+ 00a0  43 45 5c 46 57 5c 66 77                 - CE\FW\fw
+ 00a8  2e 68 00 44 3a 5c 42 52                 - .h.D:\BR
+ 00b0  53 52 43 5c 53 4f 55 52                 - SRC\SOUR
+ 00b8  43 45 5c 69 6e 63 5c 62                 - CE\inc\b
+ 00c0  72 65 6e 64 65 72 2e 68                 - render.h
+ 00c8  00 44 3a 5c 42 52 53 52                 - .D:\BRSR
+ 00d0  43 5c 53 4f 55 52 43 45                 - C\SOURCE
+ 00d8  5c 69 6e 63 5c 63 6f 6d                 - \inc\com
+ 00e0  70 69 6c 65 72 2e 68 00                 - piler.h.
+ 00e8  44 3a 5c 42 52 53 52 43                 - D:\BRSRC
+ 00f0  5c 53 4f 55 52 43 45 5c                 - \SOURCE\
+ 00f8  69 6e 63 5c 62 72 6c 69                 - inc\brli
+ 0100  6d 69 74 73 2e 68 00 44                 - mits.h.D
+ 0108  3a 5c 42 52 53 52 43 5c                 - :\BRSRC\
+ 0110  53 4f 55 52 43 45 5c 69                 - SOURCE\i
+ 0118  6e 63 5c 66 69 78 65 64                 - nc\fixed
+ 0120  2e 68 00 44 3a 5c 42 52                 - .h.D:\BR
+ 0128  53 52 43 5c 53 4f 55 52                 - SRC\SOUR
+ 0130  43 45 5c 69 6e 63 5c 73                 - CE\inc\s
+ 0138  63 61 6c 61 72 2e 68 00                 - calar.h.
+ 0140  44 3a 5c 42 52 53 52 43                 - D:\BRSRC
+ 0148  5c 53 4f 55 52 43 45 5c                 - \SOURCE\
+ 0150  69 6e 63 5c 63 6f 6c 6f                 - inc\colo
+ 0158  75 72 2e 68 00 44 3a 5c                 - ur.h.D:\
+ 0160  42 52 53 52 43 5c 53 4f                 - BRSRC\SO
+ 0168  55 52 43 45 5c 69 6e 63                 - URCE\inc
+ 0170  5c 6d 61 74 72 69 78 2e                 - \matrix.
+ 0178  68 00 44 3a 5c 42 52 53                 - h.D:\BRS
+ 0180  52 43 5c 53 4f 55 52 43                 - RC\SOURC
+ 0188  45 5c 69 6e 63 5c 76 65                 - E\inc\ve
+ 0190  63 74 6f 72 2e 68 00 44                 - ctor.h.D
+ 0198  3a 5c 42 52 53 52 43 5c                 - :\BRSRC\
+ 01a0  53 4f 55 52 43 45 5c 69                 - SOURCE\i
+ 01a8  6e 63 5c 61 6e 67 6c 65                 - nc\angle
+ 01b0  73 2e 68 00 44 3a 5c 42                 - s.h.D:\B
+ 01b8  52 53 52 43 5c 53 4f 55                 - RSRC\SOU
+ 01c0  52 43 45 5c 69 6e 63 5c                 - RCE\inc\
+ 01c8  71 75 61 74 2e 68 00 44                 - quat.h.D
+ 01d0  3a 5c 42 52 53 52 43 5c                 - :\BRSRC\
+ 01d8  53 4f 55 52 43 45 5c 69                 - SOURCE\i
+ 01e0  6e 63 5c 74 72 61 6e 73                 - nc\trans
+ 01e8  66 72 6d 2e 68 00 44 3a                 - frm.h.D:
+ 01f0  5c 42 52 53 52 43 5c 53                 - \BRSRC\S
+ 01f8  4f 55 52 43 45 5c 69 6e                 - OURCE\in
+ 0200  63 5c 6f 72 64 65 72 2e                 - c\order.
+ 0208  68 00 44 3a 5c 42 52 53                 - h.D:\BRS
+ 0210  52 43 5c 53 4f 55 52 43                 - RC\SOURC
+ 0218  45 5c 69 6e 63 5c 70 69                 - E\inc\pi
+ 0220  78 65 6c 6d 61 70 2e 68                 - xelmap.h
+ 0228  00 44 3a 5c 42 52 53 52                 - .D:\BRSR
+ 0230  43 5c 53 4f 55 52 43 45                 - C\SOURCE
+ 0238  5c 69 6e 63 5c 62 72 66                 - \inc\brf
+ 0240  6f 6e 74 2e 68 00 44 3a                 - ont.h.D:
+ 0248  5c 42 52 53 52 43 5c 53                 - \BRSRC\S
+ 0250  4f 55 52 43 45 5c 69 6e                 - OURCE\in
+ 0258  63 5c 6d 61 74 65 72 69                 - c\materi
+ 0260  61 6c 2e 68 00 44 3a 5c                 - al.h.D:\
+ 0268  42 52 53 52 43 5c 53 4f                 - BRSRC\SO
+ 0270  55 52 43 45 5c 69 6e 63                 - URCE\inc
+ 0278  5c 6d 6f 64 65 6c 2e 68                 - \model.h
+ 0280  00 44 3a 5c 42 52 53 52                 - .D:\BRSR
+ 0288  43 5c 53 4f 55 52 43 45                 - C\SOURCE
+ 0290  5c 69 6e 63 5c 61 63 74                 - \inc\act
+ 0298  6f 72 2e 68 00 44 3a 5c                 - or.h.D:\
+ 02a0  42 52 53 52 43 5c 53 4f                 - BRSRC\SO
+ 02a8  55 52 43 45 5c 69 6e 63                 - URCE\inc
+ 02b0  5c 63 61 6d 65 72 61 2e                 - \camera.
+ 02b8  68 00 44 3a 5c 42 52 53                 - h.D:\BRS
+ 02c0  52 43 5c 53 4f 55 52 43                 - RC\SOURC
+ 02c8  45 5c 69 6e 63 5c 6c 69                 - E\inc\li
+ 02d0  67 68 74 2e 68 00 44 3a                 - ght.h.D:
+ 02d8  5c 42 52 53 52 43 5c 53                 - \BRSRC\S
+ 02e0  4f 55 52 43 45 5c 69 6e                 - OURCE\in
+ 02e8  63 5c 70 6f 6f 6c 2e 68                 - c\pool.h
+ 02f0  00 44 3a 5c 42 52 53 52                 - .D:\BRSR
+ 02f8  43 5c 53 4f 55 52 43 45                 - C\SOURCE
+ 0300  5c 69 6e 63 5c 63 75 73                 - \inc\cus
+ 0308  74 73 75 70 74 2e 68 00                 - tsupt.h.
+ 0310  44 3a 5c 42 52 53 52 43                 - D:\BRSRC
+ 0318  5c 53 4f 55 52 43 45 5c                 - \SOURCE\
+ 0320  69 6e 63 5c 62 72 66 69                 - inc\brfi
+ 0328  6c 65 2e 68 00 44 3a 5c                 - le.h.D:\
+ 0330  42 52 53 52 43 5c 53 4f                 - BRSRC\SO
+ 0338  55 52 43 45 5c 69 6e 63                 - URCE\inc
+ 0340  5c 62 72 64 69 61 67 2e                 - \brdiag.
+ 0348  68 00 44 3a 5c 42 52 53                 - h.D:\BRS
+ 0350  52 43 5c 53 4f 55 52 43                 - RC\SOURC
+ 0358  45 5c 69 6e 63 5c 62 72                 - E\inc\br
+ 0360  6d 65 6d 2e 68 00 44 3a                 - mem.h.D:
+ 0368  5c 42 52 53 52 43 5c 53                 - \BRSRC\S
+ 0370  4f 55 52 43 45 5c 69 6e                 - OURCE\in
+ 0378  63 5c 62 72 65 72 72 2e                 - c\brerr.
+ 0380  68 00 44 3a 5c 42 52 53                 - h.D:\BRS
+ 0388  52 43 5c 53 4f 55 52 43                 - RC\SOURC
+ 0390  45 5c 69 6e 63 5c 66 6d                 - E\inc\fm
+ 0398  74 2e 68 00 44 3a 5c 42                 - t.h.D:\B
+ 03a0  52 53 52 43 5c 53 4f 55                 - RSRC\SOU
+ 03a8  52 43 45 5c 69 6e 63 5c                 - RCE\inc\
+ 03b0  66 6d 74 70 72 6f 74 6f                 - fmtproto
+ 03b8  2e 68 00 44 3a 5c 42 52                 - .h.D:\BR
+ 03c0  53 52 43 5c 53 4f 55 52                 - SRC\SOUR
+ 03c8  43 45 5c 69 6e 63 5c 66                 - CE\inc\f
+ 03d0  77 70 72 6f 74 6f 2e 68                 - wproto.h
+ 03d8  00 44 3a 5c 42 52 53 52                 - .D:\BRSR
+ 03e0  43 5c 53 4f 55 52 43 45                 - C\SOURCE
+ 03e8  5c 69 6e 63 5c 77 74 63                 - \inc\wtc
+ 03f0  69 66 69 78 2e 68 00 44                 - ifix.h.D
+ 03f8  3a 5c 42 52 53 52 43 5c                 - :\BRSRC\
+ 0400  53 4f 55 52 43 45 5c 69                 - SOURCE\i
+ 0408  6e 63 5c 7a 62 70 72 6f                 - nc\zbpro
+ 0410  74 6f 2e 68 00 44 3a 5c                 - to.h.D:\
+ 0418  42 52 53 52 43 5c 53 4f                 - BRSRC\SO
+ 0420  55 52 43 45 5c 69 6e 63                 - URCE\inc
+ 0428  5c 7a 73 70 72 6f 74 6f                 - \zsproto
+ 0430  2e 68 00 44 3a 5c 42 52                 - .h.D:\BR
+ 0438  53 52 43 5c 53 4f 55 52                 - SRC\SOUR
+ 0440  43 45 5c 69 6e 63 5c 66                 - CE\inc\f
+ 0448  77 70 65 78 74 72 61 2e                 - wpextra.
+ 0450  68 00 44 3a 5c 42 52 53                 - h.D:\BRS
+ 0458  52 43 5c 53 4f 55 52 43                 - RC\SOURC
+ 0460  45 5c 69 6e 63 5c 76 65                 - E\inc\ve
+ 0468  63 66 6e 73 2e 68 00 44                 - cfns.h.D
+ 0470  3a 5c 42 52 53 52 43 5c                 - :\BRSRC\
+ 0478  53 4f 55 52 43 45 5c 69                 - SOURCE\i
+ 0480  6e 63 5c 63 6f 6d 70 65                 - nc\compe
+ 0488  6e 64 2e 68 00 44 3a 5c                 - nd.h.D:\
+ 0490  42 52 53 52 43 5c 53 4f                 - BRSRC\SO
+ 0498  55 52 43 45 5c 46 57 5c                 - URCE\FW\
+ 04a0  62 72 6c 69 73 74 73 2e                 - brlists.
+ 04a8  68 00 44 3a 5c 42 52 53                 - h.D:\BRS
+ 04b0  52 43 5c 53 4f 55 52 43                 - RC\SOURC
+ 04b8  45 5c 46 57 5c 62 72 65                 - E\FW\bre
+ 04c0  78 63 65 70 74 2e 68 00                 - xcept.h.
+ 04c8  43 3a 5c 57 43 5c 48 5c                 - C:\WC\H\
+ 04d0  73 65 74 6a 6d 70 2e 68                 - setjmp.h
+ 04d8  00 44 3a 5c 42 52 53 52                 - .D:\BRSR
+ 04e0  43 5c 53 4f 55 52 43 45                 - C\SOURCE
+ 04e8  5c 46 57 5c 62 72 69 6d                 - \FW\brim
+ 04f0  61 67 65 2e 68 00 44 3a                 - age.h.D:
+ 04f8  5c 42 52 53 52 43 5c 53                 - \BRSRC\S
+ 0500  4f 55 52 43 45 5c 46 57                 - OURCE\FW
+ 0508  5c 72 65 67 69 73 74 65                 - \registe
+ 0510  72 2e 68 00 44 3a 5c 42                 - r.h.D:\B
+ 0518  52 53 52 43 5c 53 4f 55                 - RSRC\SOU
+ 0520  52 43 45 5c 46 57 5c 64                 - RCE\FW\d
+ 0528  65 76 69 63 65 2e 68 00                 - evice.h.
+ 0530  44 3a 5c 42 52 53 52 43                 - D:\BRSRC
+ 0538  5c 53 4f 55 52 43 45 5c                 - \SOURCE\
+ 0540  46 57 5c 66 77 69 70 72                 - FW\fwipr
+ 0548  6f 74 6f 2e 68 00 44 3a                 - oto.h.D:
+ 0550  5c 42 52 53 52 43 5c 53                 - \BRSRC\S
+ 0558  4f 55 52 43 45 5c 46 57                 - OURCE\FW
+ 0560  5c 66 77 69 70 78 74 72                 - \fwipxtr
+ 0568  61 2e 68 00 44 3a 5c 42                 - a.h.D:\B
+ 0570  52 53 52 43 5c 53 4f 55                 - RSRC\SOU
+ 0578  52 43 45 5c 46 57 5c 76                 - RCE\FW\v
+ 0580  65 63 69 66 6e 73 2e 68                 - ecifns.h
+ 0588  00 44 3a 5c 42 52 53 52                 - .D:\BRSR
+ 0590  43 5c 53 4f 55 52 43 45                 - C\SOURCE
+ 0598  5c 46 57 5c 73 68 6f 72                 - \FW\shor
+ 05a0  74 63 75 74 2e 68 00 44                 - tcut.h.D
+ 05a8  3a 5c 42 52 53 52 43 5c                 - :\BRSRC\
+ 05b0  53 4f 55 52 43 45 5c 46                 - SOURCE\F
+ 05b8  57 5c 62 72 61 73 73 65                 - W\brasse
+ 05c0  72 74 2e 68 00                          - rt.h.
+
+No disassembly errors
+
+------------------------------------------------------------

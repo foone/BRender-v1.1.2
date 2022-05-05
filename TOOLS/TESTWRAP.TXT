@@ -1,0 +1,81 @@
+*FILE_INFO        3
+  struct    file_info
+    enum_32   FILE_TYPE_MODEL                          # type
+    uint_32   2                                        # version
+*MODEL            3
+  struct    br_model
+    uint_16   0                                        # flags
+    asciz     "test"                                   # identifier
+*VERTICES         25
+ count 6
+  struct    br_vertex
+    scalar    -0.7     		                       # p.v[X]
+    scalar    -0.7              	               # p.v[Y]
+    scalar    0.0                                      # p.v[Z]
+  struct    br_vertex
+    scalar    0.7                                      # p.v[X]
+    scalar    -0.7                                     # p.v[Y]
+    scalar    0.0                                      # p.v[Z]
+  struct    br_vertex
+    scalar    -0.7                                     # p.v[X]
+    scalar    0                                        # p.v[Y]
+    scalar    0                                        # p.v[Z]
+  struct    br_vertex
+    scalar    0.7                                      # p.v[X]
+    scalar    0                                        # p.v[Y]
+    scalar    0                                        # p.v[Z]
+  struct    br_vertex
+    scalar    -0.7                                     # p.v[X]
+    scalar    0.7                                      # p.v[Y]
+    scalar    -0.0                                     # p.v[Z]
+  struct    br_vertex
+    scalar    0.7                                      # p.v[X]
+    scalar    0.7                                      # p.v[Y]
+    scalar    -0.0                                     # p.v[Z]
+*VERTEX_UV        19
+ count 6
+  struct    br_vertex_uv
+    scalar    0.03                                 # map.v[0]
+    scalar    0.73                                 # map.v[1]
+  struct    br_vertex_uv
+    scalar    0.90                                 # map.v[0]
+    scalar    0.73                                 # map.v[1]
+  struct    br_vertex_uv
+    scalar    0.03                                 # map.v[0]
+    scalar    0.01                                  # map.v[1]
+  struct    br_vertex_uv
+    scalar    0.90                                 # map.v[0]
+    scalar    0.01                                  # map.v[1]
+  struct    br_vertex_uv
+    scalar    0.03                                 # map.v[0]
+    scalar    0.28                                  # map.v[1]
+  struct    br_vertex_uv
+    scalar    0.90                                    # map.v[0]
+    scalar    0.28                                    # map.v[1]
+*FACES            25
+ count 4
+  struct    br_face
+    uint_16   0                                        # vertices[0]
+    uint_16   1                                        # vertices[1]
+    uint_16   3                                        # vertices[2]
+    uint_16   1                                        # smoothing
+    uint_8    4                                        # flags
+  struct    br_face
+    uint_16   0                                        # vertices[0]
+    uint_16   3                                        # vertices[1]
+    uint_16   2                                        # vertices[2]
+    uint_16   1                                        # smoothing
+    uint_8    1                                        # flags
+  struct    br_face
+    uint_16   2                                        # vertices[0]
+    uint_16   3                                        # vertices[1]
+    uint_16   5                                        # vertices[2]
+    uint_16   1                                        # smoothing
+    uint_8    4                                        # flags
+  struct    br_face
+    uint_16   2                                        # vertices[0]
+    uint_16   5                                        # vertices[1]
+    uint_16   4                                        # vertices[2]
+    uint_16   1                                        # smoothing
+    uint_8    1                                        # flags
+*END              0

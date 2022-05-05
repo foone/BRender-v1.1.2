@@ -1,0 +1,27 @@
+ofileops.c(18): Error! E1055: Unable to open 'argstd.h'
+ofileops.c(19): Error! E1055: Unable to open 'error.h'
+ofileops.c(24): Error! E1055: Unable to open 'animate.h'
+ofileops.c(134): Error! E1022: Missing or misspelled data type near 'br_animation'
+ofileops.c(141): Error! E1127: Type required in parameter list
+ofileops.c(141): Error! E1022: Missing or misspelled data type near 'br_animation'
+ofileops.c(146): Error! E1011: Symbol 'br_animation' has not been declared
+ofileops.c(146): Error! E1011: Symbol 'temp' has not been declared
+ofileops.c(146): Warning! W111: Meaningless use of an expression
+ofileops.c(147): Error! E1011: Symbol 'frames' has not been declared
+ofileops.c(147): Error! E1029: Expression must be 'pointer to ...'
+ofileops.c(147): Warning! W111: Meaningless use of an expression
+ofileops.c(148): Error! E1058: Cannot use typedef 'FILE' as a variable
+ofileops.c(148): Error! E1011: Symbol 'fp' has not been declared
+ofileops.c(148): Warning! W111: Meaningless use of an expression
+ofileops.c(149): Error! E1063: Missing operand
+ofileops.c(149): Warning! W111: Meaningless use of an expression
+ofileops.c(149): Error! E1009: Expecting ';' but found 'char'
+ofileops.c(149): Error! E1011: Symbol 'name' has not been declared
+ofileops.c(149): Error! E1029: Expression must be 'pointer to ...'
+ofileops.c(149): Warning! W111: Meaningless use of an expression
+ofileops.c(158): Error! E1063: Missing operand
+ofileops.c(158): Error! E1009: Expecting ';' but found 'DfPop'
+ofileops.c(158): Warning! W111: Meaningless use of an expression
+ofileops.c(163): Error! E1045: Subscript on non-array
+ofileops.c(164): Error! E1063: Missing operand
+ofileops.c(164): Error! E1147: Too many errors: compilation aborted

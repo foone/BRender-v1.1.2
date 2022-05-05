@@ -1,0 +1,20 @@
+.386p
+                NAME    realvec
+DGROUP          GROUP   CONST,CONST2,_DATA,_BSS
+_TEXT           SEGMENT PARA PUBLIC USE32 'CODE'
+                ASSUME  CS:_TEXT ,DS:DGROUP,SS:DGROUP
+_TEXT           ENDS
+
+CONST           SEGMENT DWORD PUBLIC USE32 'DATA'
+CONST           ENDS
+
+CONST2          SEGMENT DWORD PUBLIC USE32 'DATA'
+CONST2          ENDS
+
+_DATA           SEGMENT DWORD PUBLIC USE32 'DATA'
+_DATA           ENDS
+
+_BSS            SEGMENT DWORD PUBLIC USE32 'BSS'
+_BSS            ENDS
+
+                END

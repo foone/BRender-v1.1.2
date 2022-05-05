@@ -1,0 +1,15 @@
+# Copyright (c) 1993-1995 Argonaut Technologies Limited. All rights reserved.
+#
+# $Id: dospxtra.fns 1.1 1995/07/28 19:00:17 sam Exp $
+# $Locker:  $
+#
+# List of functions that need per compiler C<-> ASM glue
+#
+
+DOSClockBegin
+DOSClockEnd
+DOSClockRead
+DOSDivTrapBegin
+DOSDivTrapEnd
+DOSDivTrapCount
+

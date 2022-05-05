@@ -1,0 +1,57 @@
+# Copyright (c) 1993-1995 Argonaut Technologies Limited. All rights reserved.
+#
+# $Id: zbipxtra.fns 1.1 1995/05/25 13:36:23 sam Exp $
+# $Locker:  $
+#
+# List of functions that need per compiler C<-> ASM glue
+#
+
+zb
+TriangleRenderPFZ2
+TriangleRenderPFZ2I
+TriangleRenderPFZ2T
+TriangleRenderPFZ2TI
+TriangleRenderPIZ2
+TriangleRenderPIZ2I
+TriangleRenderPIZ2T
+TriangleRenderPIZ2TB
+TriangleRenderPIZ2TI
+TriangleRenderPIZ2_RGB_888
+TriangleRenderPIZ2I_RGB_888
+TriangleRenderPIZ2_RGB_555
+TriangleRenderPIZ2I_RGB_555
+TriangleRenderPIZ2TIP1024
+TriangleRenderPIZ2TIP256
+TriangleRenderPIZ2TIP64
+TriangleRenderPIZ2TP1024
+TriangleRenderPIZ2TP256
+TriangleRenderPIZ2TP64
+TriangleRenderPIZ2TA
+TriangleRenderPIZ2TIA
+TriangleRenderPIZ2TA15
+TriangleRenderPIZ2TA24
+OSFFVGroupCulled_A
+OSFFVGroupCulledLit_A
+OSTVGroup_A
+OSTVGroupLit_A
+OSTVGroupBC_A
+OSTVGroupLitBC_A
+OSCopyModelToScreen_A
+_sar16
+
+TrapezoidRenderPIZ2TIA
+TrapezoidRenderPIZ2TA
+TrapezoidRenderPIZ2TA15
+TrapezoidRenderPIZ2TA24
+
+SafeFixedMac2Div
+
+awsl
+
+ScanLinePIZ2TIP256
+ScanLinePIZ2TIP64
+ScanLinePIZ2TP1024
+ScanLinePIZ2TP256
+ScanLinePIZ2TP64
+
+tsl
