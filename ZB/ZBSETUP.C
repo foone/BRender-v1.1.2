@@ -250,8 +250,8 @@ STATIC struct zb_material_type mat_types_index_8[] = {
 		IDENT("Smooth shading"),
 		BR_MATF_SMOOTH, BR_MATF_SMOOTH,
 		0, 0, 0,
-		ZbRenderFaceGroup_FaceIV, TriangleRenderPIZ2TIA, LineRenderPIZ2TI, PointRenderPIZ2TI,
-//		ZbRenderFaceGroup, TriangleRenderPIZ2I, LineRenderPIZ2I, PointRenderPIZ2,
+//		ZbRenderFaceGroup_FaceIV, TriangleRenderPIZ2TIA, LineRenderPIZ2TI, PointRenderPIZ2TI,
+		ZbRenderFaceGroup, TriangleRenderPIZ2I, LineRenderPIZ2I, PointRenderPIZ2,
 		CM_COORDS | CM_I, CM_I,
 	},
 	{
@@ -259,8 +259,8 @@ STATIC struct zb_material_type mat_types_index_8[] = {
 		0, 0,
 		0, 0, 0,
 //		ZbRenderFaceGroup_FaceI, TriangleRenderPIZ2, LineRenderPIZ2I, PointRenderPIZ2,
-		ZbRenderFaceGroup_FaceIV, TriangleRenderPIZ2TIA, LineRenderPIZ2TI, PointRenderPIZ2TI,
-//		ZbRenderFaceGroup, TriangleRender_Null, LineRender_Null, PointRender_Null,
+//		ZbRenderFaceGroup_FaceIV, TriangleRenderPIZ2TIA, LineRenderPIZ2TI, PointRenderPIZ2TI,
+		ZbRenderFaceGroup, TriangleRender_Null, LineRender_Null, PointRender_Null,
 		CM_COORDS, 0,
 	},
 };
