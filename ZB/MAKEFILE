@@ -5,7 +5,7 @@
 #
 # Makefile for Brender Z-Buffer renderer
 #
-.IMPORT: BASE_DIR BUILD MAKE_EXT
+.IMPORT: BASE_DIR MAKE_EXT
 .IMPORT .IGNORE: TARGET_TYPE
 
 LIB_PART:=brzb

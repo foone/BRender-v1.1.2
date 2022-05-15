@@ -290,12 +290,12 @@ SRCS:=$(OBJS_C:s/.obj/.c/) $(OBJS_ASM:s/.obj/.asm/)
 
 	
 depend: $(BLD_DIR)/exists
-	sed "s/^$(BLD_DIR)\///" <$(mktmp,_mkdep.tmp $(SRCS:t"\n":s,\,/,)\n) >_mkdep.rsp
-	$(MKDEP) $(MKDEPFLAGS) @_mkdep.rsp -o_depend.tmp
-	sed "s/^/$(BLD_DIR)\//" <_depend.tmp >$(BLD_DIR)\\depend.out
-	$(RM) _mkdep.rsp
-	$(RM) _depend.tmp
-
+	$(PERL) $(BASE_DIR)\bin\mkdep.pl @$(mktmp -o $(BLD_DIR)/ -s \
+		-i $(BLD_DIR) -i $(INCLUDES:t" -i ":s/\/\\/) -x $(OBJ_EXT) $(SRCS)) > $(BLD_DIR)\depend.out
+.IF $(LIB_INC)
+	$(PERL) $(BASE_DIR)\bin\mkdep.pl @$(mktmp -o $(BLD_DIR)/ -s \
+		-i $(BLD_DIR) -i $(INCLUDES:t" -i ":s/\/\\/) -x inc $(LIB_INC).h) >> $(BLD_DIR)\depend.out
+.END
 
 .INCLUDE .IGNORE: $(BLD_DIR)/depend.out
 
